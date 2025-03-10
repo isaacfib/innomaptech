@@ -4,378 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INNOMAPTECH - Mapping & Technology Solutions</title>
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #10b981;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #94a3b8;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            color: var(--dark);
-            line-height: 1.6;
-            background-color: var(--light);
-        }
-        
-        header {
-            background-color: var(--primary);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .hero {
-            background: linear-gradient(rgba(37, 99, 235, 0.8), rgba(37, 99, 235, 0.9)), url('/api/placeholder/1200/800') center/cover;
-            color: white;
-            padding: 5rem 0;
-            text-align: center;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: var(--secondary);
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        section {
-            padding: 5rem 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-            padding-bottom: 1rem;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background-color: var(--secondary);
-        }
-        
-        .services {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .service-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .service-img {
-            height: 200px;
-            background-color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .service-img i {
-            font-size: 3rem;
-            color: white;
-        }
-        
-        .service-content {
-            padding: 2rem;
-        }
-        
-        .service-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-        
-        .workflow {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #f1f5f9;
-            padding: 5rem 0;
-        }
-        
-        .workflow-steps {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            flex: 1 1 300px;
-            margin: 1rem;
-            padding: 2rem;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: relative;
-        }
-        
-        .step-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background-color: var(--primary);
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
-            border-radius: 50%;
-            position: absolute;
-            top: -25px;
-            left: calc(50% - 25px);
-        }
-        
-        .testimonials {
-            background-color: var(--dark);
-            color: white;
-        }
-        
-        .testimonial-slider {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .testimonial-content {
-            font-style: italic;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .testimonial-author {
-            font-weight: bold;
-        }
-        
-        .cta {
-            text-align: center;
-            background-color: var(--primary);
-            color: white;
-            padding: 5rem 0;
-        }
-        
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta p {
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            font-size: 1.2rem;
-        }
-        
-        .cta .btn {
-            background-color: white;
-            color: var(--primary);
-            font-size: 1.2rem;
-            padding: 1rem 3rem;
-        }
-        
-        footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-bottom: 2rem;
-        }
-        
-        .footer-section {
-            flex: 1 1 300px;
-            margin: 1rem;
-        }
-        
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-        
-        .contact-info div {
-            margin-bottom: 0.5rem;
-        }
-        
-        .copyright {
-            border-top: 1px solid var(--gray);
-            padding-top: 2rem;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-        }
-        
-        .close-btn {
-            float: right;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        form {
-            margin-top: 1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-        
-        input, textarea, select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--gray);
-            border-radius: 5px;
-        }
-        
-        button[type="submit"] {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-        }
-        
-        button[type="submit"]:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .service-detail {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .service-card.expanded .service-detail {
-            max-height: 500px;
-        }
-
-        .read-more {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
         <div class="container">
-            <h1>INNOMAPTECH</h1>
-            <p>Innovative Mapping & Technology Solutions</p>
+            <div class="logo">
+                <img src="https://placehold.co/100x50?text=Logo" alt="INNOMAPTECH Logo">
+                <h1>INNOMAPTECH</h1>
+            </div>
+            <nav>
+                <div class="hamburger">☰</div>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact" id="headerContactBtn">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1>Transform Your Geographic Data Into Strategic Business Assets</h1>
             <p>INNOMAPTECH provides end-to-end mapping and technology solutions that help businesses make smarter decisions about their land, resources, and infrastructure.</p>
-            <a href="#contact" class="btn">Discuss Your Project</a>
+            <a href="#contact" class="btn" id="openModalBtn">Discuss Your Project</a>
         </div>
     </section>
 
-    <section class="about">
+    <!-- About Section -->
+    <section id="about" class="about">
         <div class="container">
             <div class="section-title">
                 <h2>Your Comprehensive Mapping Partner</h2>
@@ -385,213 +46,175 @@
         </div>
     </section>
 
+    <!-- Services Section -->
     <section id="services">
         <div class="container">
             <div class="section-title">
                 <h2>Our Services</h2>
             </div>
-            <div class="services">
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Data Acquisition">
-                    </div>
-                    <div class="service-content">
-                        <h3>Data Acquisition</h3>
-                        <p>The foundation of reliable mapping begins with accurate data collection. Our field specialists gather precise coordinates and essential information about your land.</p>
-                        <div class="service-detail">
-                            <p>Without accurate initial data, all downstream mapping products would be compromised. Our Data Acquisition Service eliminates the risk of making decisions based on outdated or inaccurate information.</p>
-                            <p>This service is particularly valuable for agricultural businesses, property developers, and resource management companies who need absolute confidence in their geographic information.</p>
-                            <p>A property developer client avoided a costly boundary dispute because our initial data acquisition and management revealed a discrepancy from their existing records – saving months of potential delays.</p>
+            <div class="service-group">
+                <div class="group-header">
+                    <h3>Data Management Solutions</h3>
+                    <span class="toggle-btn">▼</span>
+                </div>
+                <div class="services">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Data+Acquisition" alt="Data Acquisition">
                         </div>
-                        <p><a class="read-more">Read More →</a></p>
+                        <div class="service-content">
+                            <h4>Data Acquisition</h4>
+                            <p>The foundation of reliable mapping begins with accurate data collection. Our field specialists gather precise coordinates and essential information about your land.</p>
+                            <div class="service-detail">
+                                <p>Without accurate initial data, all downstream mapping products would be compromised. Our Data Acquisition Service eliminates the risk of making decisions based on outdated or inaccurate information.</p>
+                                <p>This service is particularly valuable for agricultural businesses, property developers, and resource management companies who need absolute confidence in their geographic information.</p>
+                                <p>A property developer client avoided a costly boundary dispute because our initial data acquisition and management revealed a discrepancy from their existing records – saving months of potential delays.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    <!-- Repeat for Enhanced Data Acquisition, Data Cleanup & Standardization, Recurring Data Reports -->
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Enhanced+Data+Acquisition" alt="Enhanced Data Acquisition">
+                        </div>
+                        <div class="service-content">
+                            <h4>Enhanced Data Acquisition</h4>
+                            <p>Go beyond basic coordinates with detailed contextual information about landscape features, and infrastructures.</p>
+                            <div class="service-detail">
+                                <p>Standard mapping services often miss critical details that your projects require. Our Enhanced Data Acquisition captures the complete story your land is telling.</p>
+                                <p>This deeper understanding helps you anticipate challenges rather than react to them, identifying opportunities that standard data collection would miss.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Data+Cleanup" alt="Data Cleanup & Standardization">
+                        </div>
+                        <div class="service-content">
+                            <h4>Data Cleanup & Standardization</h4>
+                            <p>We transform raw geographic data into organized, standardized formats that integrate seamlessly with your existing systems.</p>
+                            <div class="service-detail">
+                                <p>Raw geographic data is like crude oil – valuable but not immediately usable. Our cleanup process standardizes everything into organized databases that power reliable decision-making.</p>
+                                <p>This service is critical for organizations and businesses managing fragmented or inconsistent spatial data across multiple sources and formats.</p>
+                                <p>A client reduced the time spent reconciling property records from 15 hours weekly to less than 2 hours after our cleanup service, freeing their staff for higher-value activities.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Data+Reports" alt="Recurring Data Reports">
+                        </div>
+                        <div class="service-content">
+                            <h4>Recurring Data Reports</h4>
+                            <p>Stay informed with systematic, scheduled analysis of your spatial data through regular reports that track changes and progress over time.</p>
+                            <div class="service-detail">
+                                <p>The physical world isn't static, and neither should be your understanding of it. Our reports transform mapping activities into an ongoing intelligence system that keeps you ahead of potential problems and opportunities.</p>
+                                <p>These reports are essential for tracking watershed changes, encroachment issues, and field activity progress over time.</p>
+                                <p>An agricultural client uses our periodic reports to track and plan production activities across their properties, allowing them to adjust protocols based on real data rather than assumptions – maximising resource allocation by 22% while improving efficiency.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Enhanced Data Acquisition">
-                    </div>
-                    <div class="service-content">
-                        <h3>Enhanced Data Acquisition</h3>
-                        <p>Go beyond basic coordinates with detailed contextual information about landscape features, and infrastructures.</p>
-                        <div class="service-detail">
-                            <p>Standard mapping services often miss critical details that your projects require. Our Enhanced Data Acquisition captures the complete story your land is telling.</p>
-                            <p>This deeper understanding helps you anticipate challenges rather than react to them, identifying opportunities that standard data collection would miss.</p>
+            </div>
+            <div class="service-group">
+                <div class="group-header">
+                    <h3>Mapping Solutions</h3>
+                    <span class="toggle-btn">▼</span>
+                </div>
+                <div class="services">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Basic+Mapping" alt="Basic Mapping">
                         </div>
-                        <p><a class="read-more">Read More →</a></p>
+                        <div class="service-content">
+                            <h4>Basic Mapping Solution</h4>
+                            <p>Transform your geographic data into visual representations through simple, accessible formats like PDFs or Google Earth overlays.</p>
+                            <div class="service-detail">
+                                <p>Complex data becomes instantly understandable when visualized properly. Our Basic Mapping Solution translates your geographic information into clear visual formats that anyone in your organization can comprehend.</p>
+                                <p>These maps become powerful communication tools for stakeholder meetings, planning sessions, and daily operations, requiring no specialized software or technical knowledge.</p>
+                                <p>A real estate development firm uses our basic maps in their business presentations, helping non-technical stakeholders quickly grasp property potential and project scope – significantly improving confidence and expediting investment discussions.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Advanced+Mapping" alt="Advanced Mapping">
+                        </div>
+                        <div class="service-content">
+                            <h4>Advanced Mapping Services</h4>
+                            <p>Create highly detailed, multi-layered visual representations that precisely depict boundaries, natural features, infrastructure, and specialized thematic elements.</p>
+                            <div class="service-detail">
+                                <p>When precision and detail matter, our Advanced Mapping Services deliver the comprehensive visual intelligence that complex projects demand.</p>
+                                <p>Unlike basic maps, advanced mapping allows you to analyze relationships between different aspects of your land – like how natural features or existing utility corridors might impact development plans.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Data Cleanup">
-                    </div>
-                    <div class="service-content">
-                        <h3>Data Cleanup & Standardization</h3>
-                        <p>We transform raw geographic data into organized, standardized formats that integrate seamlessly with your existing systems.</p>
-                        <div class="service-detail">
-                            <p>Raw geographic data is like crude oil – valuable but not immediately usable. Our cleanup process standardizes everything into organized databases that power reliable decision-making.</p>
-                            <p>This service is critical for organizations and businesses managing fragmented or inconsistent spatial data across multiple sources and formats.</p>
-                            <p>A client reduced the time spent reconciling property records from 15 hours weekly to less than 2 hours after our cleanup service, freeing their staff for higher-value activities.</p>
+            </div>
+            <div class="service-group">
+                <div class="group-header">
+                    <h3>Web and App Solutions</h3>
+                    <span class="toggle-btn">▼</span>
+                </div>
+                <div class="services">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Web+Integration" alt="Web Integration">
                         </div>
-                        <p><a class="read-more">Read More →</a></p>
+                        <div class="service-content">
+                            <h4>Web Integration Solutions</h4>
+                            <p>Embed your maps and spatial data into interactive online platforms accessible through standard web browsers, from simple embedded maps to sophisticated web applications.</p>
+                            <div class="service-detail">
+                                <p>Your valuable geographic information shouldn't be locked away in files accessible to only a few specialists. Our Web Integration makes your maps available through any standard web browser, transforming them from static documents into interactive tools.</p>
+                                <p>This capability democratizes access to your spatial information for authorized users anywhere with internet access, improving collaboration between departments and accelerating decision-making by creating a shared visual understanding.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
+                        </div>
+                    </div>
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Mobile+Apps" alt="Mobile Apps">
+                        </div>
+                        <div class="service-content">
+                            <h4>Mobile Application Development</h4>
+                            <p>Create custom mobile applications that deliver your mapping data and functionality to smartphones and tablets, optimized for field usage with features like offline access and GPS integration.</p>
+                            <div class="service-detail">
+                                <p>Field operations happen where desktop computers aren't practical. Our Mobile Applications bring your mapping capabilities directly to smartphones and tablets, enabling your team to access, update, and utilize spatial data precisely where the work happens.</p>
+                                <p>These custom apps can provide navigation guidance, allow real-time data collection, function offline in remote areas, and synchronize with your central systems when connectivity returns.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
+                        </div>
                     </div>
                 </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Data Reports">
-                    </div>
-                    <div class="service-content">
-                        <h3>Recurring Data Reports</h3>
-                        <p>Stay informed with systematic, scheduled analysis of your spatial data through regular reports that track changes and progress over time.</p>
-                        <div class="service-detail">
-                            <p>The physical world isn't static, and neither should be your understanding of it. Our reports transform mapping activities into an ongoing intelligence system that keeps you ahead of potential problems and opportunities.</p>
-                            <p>These reports are essential for tracking watershed changes, encroachment issues, and field activity progress over time.</p>
-                            <p>An agricultural client uses our periodic reports to track and plan production activities across their properties, allowing them to adjust protocols based on real data rather than assumptions – maximising resource allocation by 22% while improving efficiency.</p>
+            </div>
+            <div class="service-group standalone">
+                <div class="services">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://placehold.co/300x200?text=Flexible+Contracts" alt="Flexible Contracts">
                         </div>
-                        <p><a class="read-more">Read More →</a></p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Basic Mapping">
-                    </div>
-                    <div class="service-content">
-                        <h3>Basic Mapping Solution</h3>
-                        <p>Transform your geographic data into visual representations through simple, accessible formats like PDFs or Google Earth overlays.</p>
-                        <div class="service-detail">
-                            <p>Complex data becomes instantly understandable when visualized properly. Our Basic Mapping Solution translates your geographic information into clear visual formats that anyone in your organization can comprehend.</p>
-                            <p>These maps become powerful communication tools for stakeholder meetings, planning sessions, and daily operations, requiring no specialized software or technical knowledge.</p>
-                            <p>A real estate development firm uses our basic maps in their business presentations, helping non-technical stakeholders quickly grasp property potential and project scope – significantly improving confidence and expediting investment discussions.</p>
+                        <div class="service-content">
+                            <h4>Flexible Contract-Based Services</h4>
+                            <p>Choose the level of support that fits your needs, from one-time projects to ongoing updates and maintenance, with scalable service levels tailored to your evolving requirements.</p>
+                            <div class="service-detail">
+                                <p>Your geographic information needs will evolve as your projects and business grow. Our Flexible Contract-Based Services ensure you never pay for unused capabilities or find yourself without critical support when needs increase.</p>
+                                <p>This approach allows you to start with essential services that match your current budget and scale up as your requirements and ROI become clear.</p>
+                            </div>
+                            <a class="read-more">Read More →</a>
                         </div>
-                        <p><a class="read-more">Read More →</a></p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Advanced Mapping">
-                    </div>
-                    <div class="service-content">
-                        <h3>Advanced Mapping Services</h3>
-                        <p>Create highly detailed, multi-layered visual representations that precisely depict boundaries, natural features, infrastructure, and specialized thematic elements.</p>
-                        <div class="service-detail">
-                            <p>When precision and detail matter, our Advanced Mapping Services deliver the comprehensive visual intelligence that complex projects demand.</p>
-                            <p>Unlike basic maps, advanced mapping allows you to analyze relationships between different aspects of your land – like how natural features or existing utility corridors might impact development plans.</p>
-                         </div>
-                        <p><a class="read-more">Read More →</a></p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Web Integration">
-                    </div>
-                    <div class="service-content">
-                        <h3>Web Integration Solutions</h3>
-                        <p>Embed your maps and spatial data into interactive online platforms accessible through standard web browsers, from simple embedded maps to sophisticated web applications.</p>
-                        <div class="service-detail">
-                            <p>Your valuable geographic information shouldn't be locked away in files accessible to only a few specialists. Our Web Integration makes your maps available through any standard web browser, transforming them from static documents into interactive tools.</p>
-                            <p>This capability democratizes access to your spatial information for authorized users anywhere with internet access, improving collaboration between departments and accelerating decision-making by creating a shared visual understanding.</p>
-                        </div>
-                        <p><a class="read-more">Read More →</a></p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Mobile App Development">
-                    </div>
-                    <div class="service-content">
-                        <h3>Mobile Application Development</h3>
-                        <p>Create custom mobile applications that deliver your mapping data and functionality to smartphones and tablets, optimized for field usage with features like offline access and GPS integration.</p>
-                        <div class="service-detail">
-                            <p>Field operations happen where desktop computers aren't practical. Our Mobile Applications bring your mapping capabilities directly to smartphones and tablets, enabling your team to access, update, and utilize spatial data precisely where the work happens.</p>
-                            <p>These custom apps can provide navigation guidance, allow real-time data collection, function offline in remote areas, and synchronize with your central systems when connectivity returns.</p>
-                        </div>
-                        <p><a class="read-more">Read More →</a></p>
-                    </div>
-                </div>
-
-                <div class="service-card">
-                    <div class="service-img">
-                        <img src="/api/placeholder/300/200" alt="Flexible Contracts">
-                    </div>
-                    <div class="service-content">
-                        <h3>Flexible Contract-Based Services</h3>
-                        <p>Choose the level of support that fits your needs, from one-time projects to ongoing updates and maintenance, with scalable service levels tailored to your evolving requirements.</p>
-                        <div class="service-detail">
-                            <p>Your geographic information needs will evolve as your projects and business grow. Our Flexible Contract-Based Services ensure you never pay for unused capabilities or find yourself without critical support when needs increase.</p>
-                            <p>This approach allows you to start with essential services that match your current budget and scale up as your requirements and ROI become clear.</p>
-                        </div>
-                        <p><a class="read-more">Read More →</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="workflow">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Project Workflow</h2>
-            </div>
-            <div class="workflow-steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Initial Consultation</h3>
-                    <p>We begin by understanding your specific needs, challenges, and objectives to develop a customized approach.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Data Collection</h3>
-                    <p>Our team gather the precise geographic information needed for your project.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Processing & Analysis</h3>
-                    <p>We transform raw data into standardized formats and extract meaningful insights.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <h3>Visualization & Implementation</h3>
-                    <p>Your data comes to life through maps and applications tailored to your specific requirements.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <h3>Ongoing Support</h3>
-                    <p>We provide training, updates, and maintenance to ensure your mapping and technology assets continue delivering value.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="container">
-            <div class="section-title">
-                <h2>Client Success Stories</h2>
-            </div>
-            <div class="testimonial-slider">
-                <div class="testimonial">
-                    <div class="testimonial-content">
-                        "INNOMAPTECH's enhanced data acquisition revealed valuable timber resources we didn't know we had, increasing our property valuation by nearly 18%. Their attention to detail and expertise in forestry mapping has been invaluable to our operation."
-                    </div>
-                    <div class="testimonial-author">- Michael Rodriguez, Pacific Northwest Timber Management</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Transform Your Geographic Data?</h2>
-            <p>Schedule a consultation with our team to discuss your specific needs and how INNOMAPTECH can help you make smarter decisions about your land, resources, and infrastructure.</p>
-            <a href="#contact" class="btn" id="openModalBtn">Contact Us Today</a>
-        </div>
-    </section>
-
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
@@ -602,9 +225,9 @@
                 <div class="footer-section">
                     <h3>Contact Us</h3>
                     <div class="contact-info">
-                        <div><i class="fas fa-map-marker-alt"></i> 123 Tech Park Drive, Suite 500</div>
-                        <div><i class="fas fa-phone"></i> (555) 123-4567</div>
-                        <div><i class="fas fa-envelope"></i> info@innomaptech.com</div>
+                        <div>📍 123 Tech Park Drive, Suite 500</div>
+                        <div>📞 (555) 123-4567</div>
+                        <div>✉️ info@innomaptech.com</div>
                     </div>
                 </div>
                 <div class="footer-section">
@@ -616,9 +239,17 @@
                         <li><a href="#">Terms of Service</a></li>
                     </ul>
                 </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">📘</a>
+                        <a href="#" class="social-icon">🐦</a>
+                        <a href="#" class="social-icon">📸</a>
+                    </div>
+                </div>
             </div>
             <div class="copyright">
-                <p>&copy; 2025 INNOMAPTECH. All rights reserved.</p>
+                <p>© 2025 INNOMAPTECH. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -626,7 +257,7 @@
     <!-- Contact Modal -->
     <div class="modal" id="contactModal">
         <div class="modal-content">
-            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <span class="close-btn" id="closeModalBtn">×</span>
             <h2>Contact Us</h2>
             <p>Tell us about your project and we'll get back to you within one business day.</p>
             <form id="contactForm">
@@ -665,49 +296,6 @@
         </div>
     </div>
 
-    <script>
-        // Modal functionality
-        const modal = document.getElementById('contactModal');
-        const openModalBtn = document.getElementById('openModalBtn');
-        const footerContactBtn = document.getElementById('footerContactBtn');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        
-        openModalBtn.addEventListener('click', function() {
-            modal.style.display = 'flex';
-        });
-        
-        footerContactBtn.addEventListener('click', function() {
-            modal.style.display = 'flex';
-        });
-        
-        closeModalBtn.addEventListener('click', function() {
-            modal.style.display = 'none';
-        });
-        
-        window.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-        
-        // Form submission
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your interest! Our team will contact you shortly.');
-            modal.style.display = 'none';
-            contactForm.reset();
-        });
-        
-        // Read more functionality
-        const readMoreLinks = document.querySelectorAll('.read-more');
-        readMoreLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                const card = this.closest('.service-card');
-                card.classList.toggle('expanded');
-                this.textContent = card.classList.contains('expanded') ? 'Read Less ↑' : 'Read More →';
-            });
-        });
-    </script>
+    <script src="js/script.js"></script>
 </body>
 </html>
