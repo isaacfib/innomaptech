@@ -126,7 +126,7 @@ header nav ul li a:hover {
 
 /* Hero */
 .hero {
-    background: linear-gradient(rgba(2, 132, 199, 0.3), rgba(2, 132, 199, 0.3)), url('../images/hero.jpg') center/cover;
+    background: linear-gradient(rgba(2, 132, 199, 0.4), rgba(2, 132, 199, 0.4)), url('../images/hero.jpg') center/cover;
     color: var(--surface);
     padding: 6rem 0;
     text-align: center;
