@@ -72,7 +72,7 @@ header .logo {
 }
 
 header .logo img {
-    height: 50px;
+    height: 10px;
     margin-right: 1rem;
     transition: transform var(--transition-medium);
 }
@@ -126,9 +126,9 @@ header nav ul li a:hover {
 
 /* Hero */
 .hero {
-    background: linear-gradient(rgba(2, 132, 199, 0.4), rgba(2, 132, 199, 0.4)), url('../images/hero.jpg') center/cover;
+    background: linear-gradient(rgba(2, 132, 199, 0.5), rgba(2, 132, 199, 0.5)), url('../images/hero.jpg') center/cover;
     color: var(--surface);
-    padding: 0   0   6rem   0;
+    padding: 6rem 0;
     text-align: center;
     animation: fadeIn 1s ease-in;
 }
@@ -868,7 +868,7 @@ button[type="submit"]:active {
     }
     
     .hero h1 {
-        font-size: 2rem;
+        font-size: 3rem;
     }
     
     .section-title h2 {
