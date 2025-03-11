@@ -132,6 +132,14 @@ header nav ul li a:hover {
     display: none;
     font-size: 2rem;
     cursor: pointer;
+      background: transparent;
+  border: none;
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: block;
+  padding: var(--spacing-xs);
+  transition: opacity 0.3s ease-out;
 }
 
 /* Hero */
@@ -865,7 +873,15 @@ button[type="submit"]:active {
 @media (max-width: 768px) {
     .hamburger {
         display: block;
-    }
+          background: transparent;
+  border: none;
+  color: var(--color-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: block;
+  padding: var(--spacing-xs);
+  transition: opacity 0.3s ease-out;
+}
     
     .nav-links {
         display: none;
@@ -874,14 +890,25 @@ button[type="submit"]:active {
         left: 0;
         width: 100%;
         background-color: var(--primary-dark);
-        flex-direction: column;
+        flex-direction: row;
         padding: 1rem 0;
         box-shadow: var(--shadow-md);
     }
     
     .nav-links.active {
         display: flex;
-    }
+          flex-direction: row;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--color-primary);
+  padding: var(--spacing-xs);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  gap: var(--spacing-sm);
+  justify-content: centre;  
+  opacity: 1;
+}
     
     header nav ul li {
         margin: 1rem 0;
@@ -965,3 +992,11 @@ button[type="submit"]:active {
         font-size: 1.1rem;
     }
 }
+
+@media (max-width: 500px) {
+
+ .hamburger {
+    margin-left: auto; /* Push mobile menu toggle to the far right */
+    margin-right: 0; /* Ensure no right margin if any is accidentally set elsewhere */
+    display: block; /* Make sure it's visible (in case it was accidentally hidden elsewhere for small screens) */
+  }
