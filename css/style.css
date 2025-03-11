@@ -14,7 +14,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 body {
@@ -25,7 +25,8 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    /* Optional: font-weight: 700; */
 }
 
 /* Header */
@@ -414,7 +415,7 @@ input, textarea, select {
     padding: 0.8rem;
     border: 1px solid var(--border);
     border-radius: 5px;
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 button[type="submit"] {
