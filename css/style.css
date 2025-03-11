@@ -45,7 +45,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
 /* Header */
@@ -126,7 +126,7 @@ header nav ul li a:hover {
 
 /* Hero */
 .hero {
-    background: linear-gradient(rgba(2, 132, 199, 0.5), rgba(2, 132, 199, 0.5)), url('../images/hero.jpg') center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.5)), url('../images/hero.jpg') center/cover;
     color: var(--surface);
     padding: 6rem 0;
     text-align: center;
