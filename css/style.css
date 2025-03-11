@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6 {
 header {
     background: #ffffff;
     color: var(--secondary);
-    padding: 0.5rem 0;
+    padding: 0.95rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -91,7 +91,7 @@ header nav ul li {
 }
 
 header nav ul li a {
-    color: var(--surface);
+    color: #0f172a;
     text-decoration: none;
     font-weight: 500;
     transition: color var(--transition-fast);
