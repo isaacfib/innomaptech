@@ -907,7 +907,7 @@ button[type="submit"]:active {
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: var(--color-primary);
+  background: #f8fafc;
   padding: var(--spacing-xs);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   gap: var(--spacing-sm);
