@@ -432,6 +432,41 @@ button[type="submit"]:hover {
     background-color: var(--primary-dark);
 }
 
+/* Call to Action Section */
+.cta {
+    background-color: #2a9d8f; 
+    color: #ffffff; 
+    padding: 5rem 0;
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.cta p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta .btn {
+    background-color: #e9c46a; 
+    color: #ffffff;
+    padding: 1rem 2.5rem;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.cta .btn:hover {
+    background-color: #f4a261; 
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .hamburger {
