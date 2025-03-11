@@ -11,6 +11,7 @@ const modal = document.getElementById('contactModal');
 const openModalBtn = document.getElementById('openModalBtn');
 const footerContactBtn = document.getElementById('footerContactBtn');
 const headerContactBtn = document.getElementById('headerContactBtn');
+const ctaContactBtn = document.getElementById('ctaContactBtn'); 
 const closeModalBtn = document.getElementById('closeModalBtn');
 
 [openModalBtn, footerContactBtn, headerContactBtn].forEach(btn => {
