@@ -40,12 +40,22 @@ contactForm.addEventListener('submit', (e) => {
     contactForm.reset();
 });
 
-// Service Group Toggle
+// Service Group Toggle with Accordion Behavior
 const serviceGroups = document.querySelectorAll('.service-group:not(.standalone)');
+
 serviceGroups.forEach(group => {
     const header = group.querySelector('.group-header');
     header.addEventListener('click', () => {
-        group.classList.toggle('expanded');
+        const isExpanded = group.classList.contains('expanded');
+        
+        // Close all service groups
+        serviceGroups.forEach(g => g.classList.remove('expanded'));
+        
+        // If the clicked group wasn’t expanded, expand it
+        if (!isExpanded) {
+            group.classList.add('expanded');
+        }
+        // If it was already expanded, it stays closed due to the remove above
     });
 });
 
