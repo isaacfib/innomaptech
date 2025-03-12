@@ -27,11 +27,11 @@
     --radius-sm: 6px;
     --radius-md: 10px;
     --radius-lg: 16px;
-      --spacing-xs: 5px;
-      --spacing-sm: 10px;
-      --spacing-md: 20px;
-      --spacing-lg: 30px;
-      --spacing-xl: 40px;
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 30px;
+    --spacing-xl: 40px;
 }
 
 * {
@@ -62,7 +62,6 @@ header {
     top: 0;
     z-index: 1000;
     box-shadow: var(--shadow-md);
-    opacity: 1;
 }
 
 header .container {
@@ -134,17 +133,14 @@ header nav ul li a:hover {
 }
 
 .hamburger {
-    display: none;
-    font-size: 2rem;
+    background: transparent;
+    border: none;
+    color: var(--secondary);
+    font-size: 1.5rem;
     cursor: pointer;
-      background: transparent;
-  border: none;
-  color: var(--color-secondary);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: block;
-  padding: var(--spacing-xs);
-  transition: opacity 0.3s ease-out;
+    display: none;
+    padding: var(--spacing-xs);
+    transition: opacity var(--transition-fast);
 }
 
 /* Hero */
@@ -303,6 +299,11 @@ header nav ul li a:hover {
     cursor: pointer;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     position: relative;
+}
+
+.group-header:focus {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
 }
 
 .group-header::after {
@@ -473,8 +474,9 @@ header nav ul li a:hover {
 }
 
 .read-more {
+    background: none;
+    border: none;
     color: var(--secondary);
-    text-decoration: none;
     font-weight: 600;
     cursor: pointer;
     transition: color var(--transition-fast);
@@ -482,6 +484,12 @@ header nav ul li a:hover {
     padding-top: 1rem;
     display: inline-flex;
     align-items: center;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.read-more:focus {
+    outline: 2px solid var(--secondary-light);
+    outline-offset: 2px;
 }
 
 .read-more::after {
@@ -734,7 +742,7 @@ footer {
     top: 0;
     left: 0;
     width: 100%;
-    /*height: 100%;*/
+    height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
     align-items: center;
     justify-content: center;
@@ -744,6 +752,7 @@ footer {
 }
 
 .modal.active {
+    display: flex;
     opacity: 1;
 }
 
@@ -878,54 +887,35 @@ button[type="submit"]:active {
 @media (max-width: 768px) {
     .hamburger {
         display: block;
-          background: transparent;
-  border: none;
-  color: var(--color-secondary);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: block;
-  padding: var(--spacing-xs);
-  transition: opacity 0.3s ease-out;
-}
+    }
     
-    .nav-links {
+    #nav-links {
         display: none;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--primary-dark);
-        flex-direction: row;
+        background-color: var(--surface);
         padding: 1rem 0;
         box-shadow: var(--shadow-md);
     }
     
-    .nav-links.active {
+    #nav-links.active {
         display: flex;
-          flex-direction: row;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  background: #f8fafc;
-  padding: var(--spacing-xs);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  gap: var(--spacing-sm);
-  justify-content: center;  
-  opacity: 1;
-}
+        flex-direction: column;
+        align-items: center;
+    }
     
     header nav ul li {
         margin: 1rem 0;
-        text-align: center;
     }
     
     .hero {
         padding: 4rem 0;
     }
     
-    .hero h1 {
-        font-size: 3rem;
+    .hero h2 {
+        font-size: 2rem;
     }
     
     .section-title h2 {
@@ -960,7 +950,7 @@ button[type="submit"]:active {
 }
 
 @media (max-width: 480px) {
-    .hero h1 {
+    .hero h2 {
         font-size: 1.8rem;
     }
     
@@ -997,11 +987,3 @@ button[type="submit"]:active {
         font-size: 1.1rem;
     }
 }
-
-@media (max-width: 500px) {
-
- .hamburger {
-    margin-left: auto; /* Push mobile menu toggle to the far right */
-    margin-right: 0; /* Ensure no right margin if any is accidentally set elsewhere */
-    display: block; /* Make sure it's visible (in case it was accidentally hidden elsewhere for small screens) */
-  }
