@@ -1,37 +1,38 @@
 // Hamburger Menu
 const hamburger = document.querySelector('.hamburger');
-const navLinks = document.getElementById('nav-links'); // Use getElementById to target by ID
-const navLinksList = navLinks.querySelectorAll('li a'); // Get all links inside nav-links
+const navLinks = document.getElementById('nav-links');
+const navLinksList = navLinks.querySelectorAll('li a');
 
 hamburger.addEventListener('click', () => {
-    const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-    hamburger.setAttribute('aria-expanded', !expanded); // Toggle aria-expanded
+    const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+    hamburger.setAttribute('aria-expanded', !isExpanded);
     navLinks.classList.toggle('active');
-
-    if (!expanded) { // If menu is now opening
-        navLinks.setAttribute('aria-hidden', 'false'); // Make nav links accessible to screen readers
-        if (navLinksList.length > 0) {
-            navLinksList[0].focus(); // Focus the first link in the menu
-        }
-    } else { // If menu is now closing
-        navLinks.setAttribute('aria-hidden', 'true'); // Hide nav links from screen readers when closed
+    navLinks.setAttribute('aria-hidden', isExpanded);
+    if (!isExpanded && navLinksList.length > 0) {
+        navLinksList[0].focus();
     }
 });
 
-// Add event listener for focusout on the last nav link to handle keyboard navigation and menu closing
+navLinksList.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('active');
+        navLinks.setAttribute('aria-hidden', 'true');
+    });
+});
+
 if (navLinksList.length > 0) {
     navLinksList[navLinksList.length - 1].addEventListener('focusout', () => {
         if (hamburger.getAttribute('aria-expanded') === 'true') {
-            hamburger.focus(); // Return focus to the hamburger button when focus leaves the menu
-            hamburger.setAttribute('aria-expanded', 'false'); // Close the menu
+            hamburger.focus();
+            hamburger.setAttribute('aria-expanded', 'false');
             navLinks.classList.remove('active');
             navLinks.setAttribute('aria-hidden', 'true');
         }
     });
 }
 
-
-// Modal Functionality (No changes needed in this section for hamburger menu fix)
+// Modal Functionality
 const modal = document.getElementById('contactModal');
 const openModalBtns = document.querySelectorAll('#openModalBtn, #footerContactBtn, #headerContactBtn, #ctaContactBtn');
 const closeModalBtn = document.getElementById('closeModalBtn');
@@ -42,6 +43,7 @@ openModalBtns.forEach(btn => {
         modal.style.display = 'flex';
         setTimeout(() => {
             modal.classList.add('active');
+            document.getElementById('name').focus();
         }, 10);
     });
 });
@@ -62,7 +64,13 @@ window.addEventListener('click', (event) => {
     }
 });
 
-// Form Submission (No changes needed in this section for hamburger menu fix)
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModalBtn.click();
+    }
+});
+
+// Form Submission
 const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -74,29 +82,50 @@ contactForm.addEventListener('submit', (e) => {
     contactForm.reset();
 });
 
-// Service Group Toggle with Accordion Behavior (No changes needed in this section for hamburger menu fix)
+// Service Group Toggle with Accordion Behavior
 const serviceGroups = document.querySelectorAll('.service-group:not(.standalone)');
 serviceGroups.forEach(group => {
     const header = group.querySelector('.group-header');
-    header.addEventListener('click', () => {
+    const toggleExpand = () => {
         const isExpanded = group.classList.contains('expanded');
-
-        // Close all service groups
-        serviceGroups.forEach(g => g.classList.remove('expanded'));
-
-        // If the clicked group wasn’t expanded, expand it
+        serviceGroups.forEach(g => {
+            g.classList.remove('expanded');
+            g.querySelector('.group-header').setAttribute('aria-expanded', 'false');
+        });
         if (!isExpanded) {
             group.classList.add('expanded');
+            header.setAttribute('aria-expanded', 'true');
+        }
+    };
+    header.addEventListener('click', toggleExpand);
+    header.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            toggleExpand();
         }
     });
 });
 
-// Read More Functionality (No changes needed in this section for hamburger menu fix)
-const readMoreLinks = document.querySelectorAll('.read-more');
-readMoreLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        const card = link.closest('.service-card');
+// Read More Functionality
+const readMoreBtns = document.querySelectorAll('.read-more');
+readMoreBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const card = btn.closest('.service-card');
+        const isExpanded = card.classList.contains('expanded');
         card.classList.toggle('expanded');
-        link.textContent = card.classList.contains('expanded') ? 'Read Less ↑' : 'Read More →';
+        btn.setAttribute('aria-expanded', !isExpanded);
+        btn.textContent = !isExpanded ? 'Read Less ↑' : 'Read More →';
+    });
+});
+
+// Smooth Scrolling for Navigation Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 });
