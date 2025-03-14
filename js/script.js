@@ -10,7 +10,6 @@ hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     navLinks.setAttribute('aria-hidden', isExpanded);
     if (!isExpanded && navLinksList.length > 0) {
-        // Set focus to first navigation link when opening menu
         navLinksList[0].focus();
     }
 });
@@ -50,7 +49,6 @@ openModalBtns.forEach(btn => {
             modal.classList.add('active');
             document.getElementById('name').focus();
         }, 10);
-        // Add body class to prevent scrolling when modal is open
         document.body.classList.add('modal-open');
     });
 });
@@ -62,7 +60,6 @@ function closeModal() {
         modal.style.display = 'none';
         document.body.classList.remove('modal-open');
     }, 300);
-    // Return focus to the last clicked button
     document.activeElement.blur();
 }
 
@@ -87,18 +84,15 @@ const contactForm = document.getElementById('contactForm');
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
     
-    // Form validation could be added here
     const formData = new FormData(contactForm);
     const formIsValid = validateForm(formData);
     
     if (formIsValid) {
-        // Show success message with animation
         const successMessage = document.createElement('div');
         successMessage.className = 'success-message';
         successMessage.textContent = 'Thank you for your interest! Our team will contact you shortly.';
         contactForm.appendChild(successMessage);
         
-        // Reset and close after delay
         setTimeout(() => {
             closeModal();
             contactForm.reset();
@@ -109,84 +103,84 @@ contactForm.addEventListener('submit', (e) => {
 
 // Basic form validation function
 function validateForm(formData) {
-    // This could be expanded with more validation rules
     return true;
 }
 
-// Service Group Toggle with Accordion Behavior - IMPROVED
-const serviceGroups = document.querySelectorAll('.service-group:not(.standalone)');
-serviceGroups.forEach(group => {
-    const header = group.querySelector('.group-header');
-    
-    const toggleExpand = () => {
-        const isExpanded = group.classList.contains('expanded');
-        
-        // Close all service groups
-        serviceGroups.forEach(g => {
-            g.classList.remove('expanded');
-            g.querySelector('.group-header').setAttribute('aria-expanded', 'false');
+// Tab Functionality
+const tabs = document.querySelectorAll('.tab');
+const tabPanels = document.querySelectorAll('.tab-panel');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Deactivate all tabs
+        tabs.forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
         });
-        
-        // If the clicked group wasn't expanded, expand it
-        if (!isExpanded) {
-            group.classList.add('expanded');
-            header.setAttribute('aria-expanded', 'true');
-            
-            // Make sure all subservices within are collapsed initially
-            const allCardsInGroup = group.querySelectorAll('.service-card');
-            allCardsInGroup.forEach(card => {
-                card.classList.remove('expanded');
-                const btn = card.querySelector('.read-more');
-                if (btn) btn.textContent = 'Read More →';
-            });
-        }
-    };
-    
-    header.addEventListener('click', toggleExpand);
-    header.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            toggleExpand();
+        // Activate clicked tab
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        // Hide all panels
+        tabPanels.forEach(panel => {
+            panel.classList.remove('active');
+            panel.setAttribute('hidden', 'true');
+        });
+        // Show corresponding panel
+        const panelId = tab.getAttribute('aria-controls');
+        const panel = document.getElementById(panelId);
+        if (panel) {
+            panel.classList.add('active');
+            panel.removeAttribute('hidden');
         }
     });
 });
 
-// Read More Functionality - IMPROVED to support accordion behavior
+// Keyboard navigation for tabs
+tabs.forEach((tab, index) => {
+    tab.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') {
+            const nextTab = tabs[index + 1] || tabs[0];
+            nextTab.focus();
+            nextTab.click();
+        } else if (e.key === 'ArrowLeft') {
+            const prevTab = tabs[index - 1] || tabs[tabs.length - 1];
+            prevTab.focus();
+            prevTab.click();
+        }
+    });
+});
+
+// Read More Functionality
 const readMoreBtns = document.querySelectorAll('.read-more');
 readMoreBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         const card = btn.closest('.service-card');
-        const group = card.closest('.service-group');
-        const allCardsInGroup = group.querySelectorAll('.service-card');
+        const tabPanel = card.closest('.tab-panel');
+        const allCardsInPanel = tabPanel.querySelectorAll('.service-card');
         const isExpanded = card.classList.contains('expanded');
         
         if (isExpanded) {
-            // If already expanded, just collapse this card
             card.classList.remove('expanded');
             btn.setAttribute('aria-expanded', 'false');
             btn.textContent = 'Read More →';
         } else {
-            // Collapse all subservices in this group
-            allCardsInGroup.forEach(c => {
-                c.classList.remove('expanded');
-                const otherBtn = c.querySelector('.read-more');
-                if (otherBtn) {
-                    otherBtn.setAttribute('aria-expanded', 'false');
-                    otherBtn.textContent = 'Read More →';
+            allCardsInPanel.forEach(c => {
+                if (c !== card) {
+                    c.classList.remove('expanded');
+                    const otherBtn = c.querySelector('.read-more');
+                    if (otherBtn) {
+                        otherBtn.setAttribute('aria-expanded', 'false');
+                        otherBtn.textContent = 'Read More →';
+                    }
                 }
             });
-            
-            // Expand only the clicked card
             card.classList.add('expanded');
             btn.setAttribute('aria-expanded', 'true');
             btn.textContent = 'Read Less ↑';
             
-            // Scroll to make expanded content visible if needed
             setTimeout(() => {
-                // Only scroll if the expanded content is not fully visible
                 const cardRect = card.getBoundingClientRect();
                 const viewportHeight = window.innerHeight;
-                
                 if (cardRect.bottom > viewportHeight) {
                     card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
@@ -195,7 +189,7 @@ readMoreBtns.forEach(btn => {
     });
 });
 
-// Smooth Scrolling for Navigation Links with improved offset handling
+// Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -203,7 +197,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const targetElement = document.getElementById(targetId);
         
         if (targetElement) {
-            // Get header height for offset
             const headerHeight = document.querySelector('header')?.offsetHeight || 0;
             const elementPosition = targetElement.getBoundingClientRect().top;
             const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
@@ -213,11 +206,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth'
             });
             
-            // Set focus to the target for accessibility
             targetElement.setAttribute('tabindex', '-1');
             targetElement.focus();
             
-            // Close mobile menu if open
             if (navLinks.classList.contains('active')) {
                 hamburger.setAttribute('aria-expanded', 'false');
                 navLinks.classList.remove('active');
@@ -227,18 +218,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add window resize handler for responsive adjustments
+// Window resize handler
 window.addEventListener('resize', () => {
-    // Reset any height calculations or positioning that depends on screen size
     if (window.innerWidth > 768) {
-        // For desktop: ensure navigation is visible regardless of hamburger state
         navLinks.classList.remove('active');
         hamburger.setAttribute('aria-expanded', 'false');
         navLinks.setAttribute('aria-hidden', 'true');
     }
 });
 
-// Add intersection observer for scroll animations
+// Intersection observer for scroll animations
 const observeElements = document.querySelectorAll('.animate-on-scroll');
 if (observeElements.length > 0 && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
