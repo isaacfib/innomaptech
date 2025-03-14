@@ -58,14 +58,15 @@
             <div class="section-title">
                 <h2>Our Services</h2>
             </div>
-            <div class="services-container">
-                <!-- Data Management Solutions -->
-                <div class="service-group">
-                    <div class="group-header" role="button" tabindex="0" aria-expanded="false" aria-controls="services-data-management">
-                        <h3>Data Management Solutions</h3>
-                        <span class="toggle-btn">▼</span>
-                    </div>
-                    <div class="services" id="services-data-management">
+            <div class="services-tabs">
+                <div class="tabs-list" role="tablist">
+                    <button class="tab" id="data-management-tab" role="tab" aria-selected="true" aria-controls="data-management-panel" style="--active-color: var(--group1-color);">Data Management Solutions</button>
+                    <button class="tab" id="mapping-tab" role="tab" aria-selected="false" aria-controls="mapping-panel" style="--active-color: var(--group2-color);">Mapping Solutions</button>
+                    <button class="tab" id="web-app-tab" role="tab" aria-selected="false" aria-controls="web-app-panel" style="--active-color: var(--group3-color);">Web and App Solutions</button>
+                    <button class="tab" id="flexible-contracts-tab" role="tab" aria-selected="false" aria-controls="flexible-contracts-panel" style="--active-color: var(--group4-color);">Flexible Contracts</button>
+                </div>
+                <div class="tabs-panels">
+                    <div class="tab-panel active" id="data-management-panel" role="tabpanel" aria-labelledby="data-management-tab">
                         <div class="services-wrapper">
                             <div class="service-cards">
                                 <div class="service-card">
@@ -127,15 +128,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Mapping Solutions -->
-                <div class="service-group">
-                    <div class="group-header" role="button" tabindex="0" aria-expanded="false" aria-controls="services-mapping">
-                        <h3>Mapping Solutions</h3>
-                        <span class="toggle-btn">▼</span>
-                    </div>
-                    <div class="services" id="services-mapping">
+                    <div class="tab-panel" id="mapping-panel" role="tabpanel" aria-labelledby="mapping-tab" hidden>
                         <div class="services-wrapper">
                             <div class="service-cards">
                                 <div class="service-card">
@@ -169,15 +162,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Web and App Solutions -->
-                <div class="service-group">
-                    <div class="group-header" role="button" tabindex="0" aria-expanded="false" aria-controls="services-web-app">
-                        <h3>Web and App Solutions</h3>
-                        <span class="toggle-btn">▼</span>
-                    </div>
-                    <div class="services" id="services-web-app">
+                    <div class="tab-panel" id="web-app-panel" role="tabpanel" aria-labelledby="web-app-tab" hidden>
                         <div class="services-wrapper">
                             <div class="service-cards">
                                 <div class="service-card">
@@ -211,11 +196,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- Flexible Contracts (Standalone) -->
-                <div class="service-group standalone">
-                    <div class="services" id="services-flexible-contracts">
+                    <div class="tab-panel" id="flexible-contracts-panel" role="tabpanel" aria-labelledby="flexible-contracts-tab" hidden>
                         <div class="services-wrapper">
                             <div class="service-cards">
                                 <div class="service-card">
