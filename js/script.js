@@ -151,27 +151,41 @@ tabs.forEach((tab, index) => {
 });
 
 
-// Smooth Scrolling for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+// Enhanced Smooth Scrolling for Navigation Links
+document.querySelectorAll('a[href^="#"], button[data-target^="#"]').forEach(clickable => {
+    clickable.addEventListener('click', function (e) {
         e.preventDefault();
-        const targetId = this.getAttribute('href').substring(1);
-        const targetElement = document.getElementById(targetId);
+        
+        // Get target ID from href attribute or data-target attribute
+        const targetId = this.getAttribute('href') || this.getAttribute('data-target');
+        if (!targetId || targetId === '#') return;
+        
+        const cleanTargetId = targetId.substring(1); // Remove the # character
+        const targetElement = document.getElementById(cleanTargetId);
         
         if (targetElement) {
+            // Calculate offset position
             const headerHeight = document.querySelector('header')?.offsetHeight || 0;
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerHeight - 20;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
             
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: 'smooth'
-            });
+            // Add a small offset to position just before the heading
+            const offset = 20; // Adjust this value as needed for spacing
+            const scrollToPosition = targetPosition - headerHeight - offset;
             
+            // Perform the smooth scroll with easing
+            scrollWithEasing(scrollToPosition);
+            
+            // Update URL hash without jumping (optional)
+            history.pushState(null, null, targetId);
+            
+            // Set focus to the target for accessibility
             targetElement.setAttribute('tabindex', '-1');
-            targetElement.focus();
+            targetElement.focus({ preventScroll: true });
             
-            if (navLinks.classList.contains('active')) {
+            // Close mobile menu if open
+            const navLinks = document.getElementById('nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            if (navLinks?.classList.contains('active')) {
                 hamburger.setAttribute('aria-expanded', 'false');
                 navLinks.classList.remove('active');
                 navLinks.setAttribute('aria-hidden', 'true');
@@ -179,6 +193,44 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Custom easing function for smoother scrolling
+function scrollWithEasing(targetPosition) {
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    
+    // Set duration based on distance, with a minimum and maximum
+    const minDuration = 600; // Minimum duration in milliseconds
+    const maxDuration = 1200; // Maximum duration in milliseconds
+    const baseSpeed = 0.5; // Adjust for faster/slower scrolling
+    
+    // Calculate duration based on distance, but keep within min/max bounds
+    const calculatedDuration = Math.min(
+        maxDuration,
+        Math.max(minDuration, Math.abs(distance) * baseSpeed)
+    );
+    
+    let startTime = null;
+    
+    function animationStep(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / calculatedDuration, 1);
+        
+        // Easing function: easeInOutQuad for a gentle acceleration and deceleration
+        const easing = progress < 0.5 
+            ? 2 * progress * progress 
+            : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        
+        window.scrollTo(0, startPosition + distance * easing);
+        
+        if (timeElapsed < calculatedDuration) {
+            window.requestAnimationFrame(animationStep);
+        }
+    }
+    
+    window.requestAnimationFrame(animationStep);
+}
 
 // Window resize handler
 window.addEventListener('resize', () => {
