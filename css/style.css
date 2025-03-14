@@ -8,10 +8,10 @@
     --accent: #6366f1;
     --accent-light: #a5b4fc;
     --background: #f8fafc;
-      --text-primary: #0f172a;
-  --card-bg: #fff;
-  --card-shadow: rgba(0, 0, 0, 0.1);
-  --transition-speed: 0.4s;
+    --text-primary: #0f172a;
+    --card-bg: #fff;
+    --card-shadow: rgba(0, 0, 0, 0.1);
+    --transition-speed: 0.4s;
     --surface: #ffffff;
     --text: #0f172a;
     --text-light: #475569;
@@ -262,259 +262,252 @@ header nav ul li a:hover, header nav ul li button:hover {
 
 /* Services Section */
 #services {
-  padding: 5rem 0;
-  background-color: var(--background);
-  position: relative;
-  overflow: hidden;
+    padding: 5rem 0;
+    background-color: var(--background);
+    position: relative;
+    overflow: hidden;
 }
 
 #services::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.05) 0%, rgba(46, 204, 113, 0.05) 25%, rgba(155, 89, 182, 0.05) 50%, rgba(231, 76, 60, 0.05) 75%);
-  z-index: 0;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.05) 0%, rgba(46, 204, 113, 0.05) 25%, rgba(155, 89, 182, 0.05) 50%, rgba(231, 76, 60, 0.05) 75%);
+    z-index: 0;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.section-title {
-  text-align: center;
-  margin-bottom: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    position: relative;
+    z-index: 1;
 }
 
 .section-title h2 {
-  font-size: 2.5rem;
-  color: var(--text-primary);
-  position: relative;
-  display: inline-block;
-  padding-bottom: 1rem;
+    font-size: 2.5rem;
+    color: var(--text-primary);
 }
 
 .section-title h2::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
-  height: 3px;
-  background: linear-gradient(to right, var(--group1-color), var(--group2-color), var(--group3-color), var(--group4-color));
-  border-radius: 3px;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 3px;
+    background: linear-gradient(to right, var(--group1-color), var(--group2-color), var(--group3-color), var(--group4-color));
+    border-radius: 3px;
 }
 
 /* Tabs Styling */
 .services-tabs {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 }
 
 .tabs-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  perspective: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    perspective: 1000px;
 }
 
 .tab {
-  padding: 1rem 1.5rem;
-  background: var(--card-bg);
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
-  color: var(--text-primary);
-  transition: all var(--transition-speed) ease;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transform-style: preserve-3d;
+    padding: 1rem 1.5rem;
+    background: var(--card-bg);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transform-style: preserve-3d;
 }
 
 .tab::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: var(--active-color);
-  transform: scaleX(0);
-  transition: transform var(--transition-speed) ease;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--active-color);
+    transform: scaleX(0);
+    transition: transform var(--transition-speed) ease;
 }
 
 .tab[aria-selected="true"] {
-  color: var(--active-color);
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    color: var(--active-color);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .tab[aria-selected="true"]::before {
-  transform: scaleX(1);
+    transform: scaleX(1);
 }
 
 .tab:hover:not([aria-selected="true"]) {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.07);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.07);
 }
 
 .tab:hover:not([aria-selected="true"])::before {
-  transform: scaleX(0.7);
+    transform: scaleX(0.7);
 }
 
 /* Tab Panels */
 .tabs-panels {
-  position: relative;
-  min-height: 400px;
+    position: relative;
+    min-height: 400px;
 }
 
 .tab-panel {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease, transform var(--transition-speed) ease;
-  transform: translateY(20px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px);
+    transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease;
 }
 
 .tab-panel.active {
-  opacity: 1;
-  visibility: visible;
-  position: relative;
-  transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+    position: relative;
+    z-index: 1;
 }
 
 /* Services Cards */
 .service-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
 }
 
 .service-card {
-  background: var(--card-bg);
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
-  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
-  position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
 }
 
 .service-img {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
 }
 
 .service-img::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
-  z-index: 1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+    z-index: 1;
 }
 
 .service-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
 .service-card:hover .service-img img {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .service-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .service-content h4 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-  font-size: 1.3rem;
-  position: relative;
-  padding-bottom: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    position: relative;
+    padding-bottom: 0.5rem;
 }
 
 .service-content h4::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 50px;
-  height: 2px;
-  background-color: var(--active-color, var(--group1-color));
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--active-color, var(--group1-color));
 }
 
 .service-content p {
-  color: #666;
-  margin-bottom: 1rem;
-  line-height: 1.6;
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
 }
 
 .service-detail {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
 }
 
 .service-detail.expanded {
-  max-height: 400px;
+    max-height: 400px;
 }
 
 .read-more {
-  margin-top: auto;
-  align-self: flex-start;
-  background: none;
-  border: none;
-  color: var(--active-color, var(--group1-color));
-  cursor: pointer;
-  font-weight: 600;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  transition: color 0.3s ease;
+    margin-top: auto;
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: var(--active-color, var(--group1-color));
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s ease;
 }
 
 .read-more::after {
-  content: "→";
-  margin-left: 0.5rem;
-  transition: transform 0.3s ease;
+    content: "→";
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
 }
 
 .read-more[aria-expanded="true"]::after {
-  transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 /* Workflow */
@@ -948,6 +941,11 @@ button[type="submit"]:active {
     .workflow-steps {
         grid-template-columns: 1fr;
     }
+    
+    .tabs-list {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
 
 @media (max-width: 480px) {
@@ -985,88 +983,32 @@ button[type="submit"]:active {
     }
 }
 
-);
-}
-
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-  .tabs-list {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .service-cards {
-    grid-template-columns: 1fr;
-  }
-  
-  .section-title h2 {
-    font-size: 2rem;
-  }
-}
-
 /* Animation Classes */
 .fade-in {
-  animation: fadeIn 0.5s ease forwards;
-}
-
-.slide-in {
-  animation: slideIn 0.5s ease forwards;
+    animation: fadeIn 0.5s ease forwards;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateY(30px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* Custom Scrollbar for Detail Sections */
 .service-detail {
-  scrollbar-width: thin;
-  scrollbar-color: var(--active-color, var(--group1-color)) #f1f1f1;
+    scrollbar-width: thin;
+    scrollbar-color: var(--active-color, var(--group1-color)) #f1f1f1;
 }
 
 .service-detail::-webkit-scrollbar {
-  width: 6px;
+    width: 6px;
 }
 
 .service-detail::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+    background: #f1f1f1;
+    border-radius: 10px;
 }
 
 .service-detail::-webkit-scrollbar-thumb {
-  background-color: var(--active-color, var(--group1-color));
-  border-radius: 10px;
-}
-
-/* Panel Transition Effects */
-[data-tab-color="group1"] {
-  --active-color: var(--group1-color);
-}
-
-[data-tab-color="group2"] {
-  --active-color: var(--group2-color);
-}
-
-[data-tab-color="group3"] {
-  --active-color: var(--group3-color);
-}
-
-[data-tab-color="group4"] {
-  --active-color: var(--group4-color);
+    background-color: var(--active-color, var(--group1-color));
+    border-radius: 10px;
 }
