@@ -48,6 +48,10 @@ body {
     overflow-x: hidden;
 }
 
+body.modal-open {
+    overflow: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.2;
@@ -104,16 +108,19 @@ header nav ul li {
     margin-left: 2rem;
 }
 
-header nav ul li a {
+header nav ul li a, header nav ul li button {
     color: #0f172a;
     text-decoration: none;
     font-weight: 500;
     transition: color var(--transition-fast);
     position: relative;
     padding-bottom: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-header nav ul li a::after {
+header nav ul li a::after, header nav ul li button::after {
     content: '';
     position: absolute;
     width: 0;
@@ -124,11 +131,11 @@ header nav ul li a::after {
     transition: width var(--transition-medium);
 }
 
-header nav ul li a:hover::after {
+header nav ul li a:hover::after, header nav ul li button:hover::after {
     width: 100%;
 }
 
-header nav ul li a:hover {
+header nav ul li a:hover, header nav ul li button:hover {
     color: var(--secondary-light);
 }
 
@@ -681,25 +688,28 @@ footer {
     margin-bottom: 0.8rem;
 }
 
-.footer-section ul li a {
+.footer-section ul li a, .footer-section ul li button {
     color: var(--text-lighter);
     text-decoration: none;
     transition: color var(--transition-fast);
     display: inline-flex;
     align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-.footer-section ul li a::before {
+.footer-section ul li a::before, .footer-section ul li button::before {
     content: '›';
     margin-right: 0.5rem;
     transition: transform var(--transition-fast);
 }
 
-.footer-section ul li a:hover::before {
+.footer-section ul li a:hover::before, .footer-section ul li button:hover::before {
     transform: translateX(3px);
 }
 
-.footer-section ul li a:hover {
+.footer-section ul li a:hover, .footer-section ul li button:hover {
     color: var(--secondary-light);
 }
 
