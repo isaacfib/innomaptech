@@ -204,6 +204,7 @@ if (observeElements.length > 0 && 'IntersectionObserver' in window) {
     observeElements.forEach(element => {
         observer.observe(element);
     });
+}
 
 // Wait for DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
