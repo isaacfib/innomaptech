@@ -150,44 +150,6 @@ tabs.forEach((tab, index) => {
     });
 });
 
-// Read More Functionality
-const readMoreBtns = document.querySelectorAll('.read-more');
-readMoreBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const card = btn.closest('.service-card');
-        const tabPanel = card.closest('.tab-panel');
-        const allCardsInPanel = tabPanel.querySelectorAll('.service-card');
-        const isExpanded = card.classList.contains('expanded');
-        
-        if (isExpanded) {
-            card.classList.remove('expanded');
-            btn.setAttribute('aria-expanded', 'false');
-            btn.textContent = 'Read More →';
-        } else {
-            allCardsInPanel.forEach(c => {
-                if (c !== card) {
-                    c.classList.remove('expanded');
-                    const otherBtn = c.querySelector('.read-more');
-                    if (otherBtn) {
-                        otherBtn.setAttribute('aria-expanded', 'false');
-                        otherBtn.textContent = 'Read More →';
-                    }
-                }
-            });
-            card.classList.add('expanded');
-            btn.setAttribute('aria-expanded', 'true');
-            btn.textContent = 'Read Less ↑';
-            
-            setTimeout(() => {
-                const cardRect = card.getBoundingClientRect();
-                const viewportHeight = window.innerHeight;
-                if (cardRect.bottom > viewportHeight) {
-                    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            }, 50);
-        }
-    });
-});
 
 // Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -242,4 +204,439 @@ if (observeElements.length > 0 && 'IntersectionObserver' in window) {
     observeElements.forEach(element => {
         observer.observe(element);
     });
+
+// Wait for DOM to be fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize variables
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.tab-panel');
+  const readMoreButtons = document.querySelectorAll('.read-more');
+  const serviceCards = document.querySelectorAll('.service-card');
+  
+  // Set data attributes for color groups
+  const tabGroups = {
+    'data-management-tab': 'group1',
+    'mapping-tab': 'group2',
+    'web-app-tab': 'group3',
+    'flexible-contracts-tab': 'group4'
+  };
+  
+  // Color mapping for services within panels
+  const setServiceCardColors = () => {
+    panels.forEach(panel => {
+      const tabId = panel.getAttribute('aria-labelledby');
+      const groupColor = tabGroups[tabId] || 'group1';
+      
+      const cards = panel.querySelectorAll('.service-card');
+      cards.forEach(card => {
+        card.setAttribute('data-tab-color', groupColor);
+      });
+    });
+  };
+  
+  // Initialize tab functionality
+  const initTabs = () => {
+    tabs.forEach(tab => {
+      // Set initial data attributes
+      const tabId = tab.id;
+      tab.setAttribute('data-tab-color', tabGroups[tabId] || 'group1');
+      
+      // Add click event
+      tab.addEventListener('click', () => {
+        // Update tab states
+        tabs.forEach(t => {
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.setAttribute('aria-selected', 'true');
+        
+        // Show corresponding panel
+        const panelId = tab.getAttribute('aria-controls');
+        const targetPanel = document.getElementById(panelId);
+        
+        // Apply animation classes
+        panels.forEach(panel => {
+          if (panel.classList.contains('active')) {
+            panel.classList.remove('active');
+            panel.setAttribute('hidden', '');
+          }
+        });
+        
+        // Allow for transition before showing new panel
+        setTimeout(() => {
+          targetPanel.removeAttribute('hidden');
+          targetPanel.classList.add('active');
+          
+          // Animate service cards in the active panel
+          const cards = targetPanel.querySelectorAll('.service-card');
+          cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            
+            setTimeout(() => {
+              card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 100 * index); // Staggered animation
+          });
+        }, 300);
+      });
+    });
+  };
+  
+  // Initialize "Read More" buttons
+  const initReadMoreButtons = () => {
+    readMoreButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        const detailId = button.getAttribute('aria-controls');
+        const detailElement = document.getElementById(detailId);
+        
+        if (expanded) {
+          button.setAttribute('aria-expanded', 'false');
+          button.textContent = 'Read More →';
+          detailElement.classList.remove('expanded');
+        } else {
+          button.setAttribute('aria-expanded', 'true');
+          button.textContent = 'Read Less →';
+          detailElement.classList.add('expanded');
+        }
+      });
+    });
+  };
+  
+  // Add parallax effect to service cards
+  const initParallaxEffect = () => {
+    serviceCards.forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const deltaX = (x - centerX) / centerX;
+        const deltaY = (y - centerY) / centerY;
+        
+        // Limit the tilt effect
+        const tiltX = deltaY * 5;
+        const tiltY = -deltaX * 5;
+        
+        card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-5px)`;
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        card.style.transition = 'transform 0.5s ease';
+      });
+    });
+  };
+  
+  // Add intersection observer for scroll animations
+  const initScrollAnimations = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    serviceCards.forEach(card => {
+      observer.observe(card);
+    });
+  };
+  
+  // Add dynamic background effect
+  const initDynamicBackground = () => {
+    const servicesSection = document.getElementById('services');
+    
+    // Create dynamic background elements
+    const createBackgroundElements = () => {
+      const colors = [
+        'rgba(52, 152, 219, 0.1)',
+        'rgba(46, 204, 113, 0.1)',
+        'rgba(155, 89, 182, 0.1)',
+        'rgba(231, 76, 60, 0.1)'
+      ];
+      
+      for (let i = 0; i < 15; i++) {
+        const elem = document.createElement('div');
+        elem.className = 'floating-bg-element';
+        
+        // Random styling
+        const size = Math.random() * 100 + 50;
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        elem.style.width = `${size}px`;
+        elem.style.height = `${size}px`;
+        elem.style.backgroundColor = color;
+        elem.style.borderRadius = '50%';
+        elem.style.position = 'absolute';
+        elem.style.top = `${Math.random() * 100}%`;
+        elem.style.left = `${Math.random() * 100}%`;
+        elem.style.filter = 'blur(20px)';
+        elem.style.opacity = '0.7';
+        elem.style.zIndex = '0';
+        elem.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+        
+        // Animation
+        elem.style.animation = `float ${Math.random() * 10 + 15}s infinite linear`;
+        elem.style.animationDelay = `${Math.random() * 5}s`;
+        
+        servicesSection.appendChild(elem);
+      }
+      
+      // Add keyframes for floating animation
+      const styleSheet = document.createElement('style');
+      styleSheet.textContent = `
+        @keyframes float {
+          0% { transform: translate(0, 0) rotate(0); }
+          33% { transform: translate(50px, 50px) rotate(120deg); }
+          66% { transform: translate(-30px, 20px) rotate(240deg); }
+          100% { transform: translate(0, 0) rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(styleSheet);
+    };
+    
+    createBackgroundElements();
+  };
+  
+  // Interactive tab indicator
+  const initTabIndicator = () => {
+    const tabsList = document.querySelector('.tabs-list');
+    const indicator = document.createElement('div');
+    indicator.className = 'tab-indicator';
+    indicator.style.position = 'absolute';
+    indicator.style.height = '3px';
+    indicator.style.bottom = '0';
+    indicator.style.transition = 'all 0.3s ease';
+    tabsList.style.position = 'relative';
+    tabsList.appendChild(indicator);
+    
+    const updateIndicator = (tab) => {
+      const tabRect = tab.getBoundingClientRect();
+      const tabsListRect = tabsList.getBoundingClientRect();
+      
+      indicator.style.width = `${tabRect.width}px`;
+      indicator.style.left = `${tabRect.left - tabsListRect.left}px`;
+      indicator.style.backgroundColor = getComputedStyle(tab).getPropertyValue('--active-color');
+    };
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        updateIndicator(tab);
+      });
+    });
+    
+    // Initialize the indicator with the first active tab
+    const activeTab = document.querySelector('.tab[aria-selected="true"]');
+    if (activeTab) {
+      setTimeout(() => {
+        updateIndicator(activeTab);
+      }, 100);
+    }
+  };
+  
+  // Add custom cursor effect for service cards
+  const initCustomCursor = () => {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    cursor.style.position = 'fixed';
+    cursor.style.width = '30px';
+    cursor.style.height = '30px';
+    cursor.style.borderRadius = '50%';
+    cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+    cursor.style.boxShadow = '0 0 15px rgba(0, 0, 0, 0.2)';
+    cursor.style.transform = 'translate(-50%, -50%)';
+    cursor.style.pointerEvents = 'none';
+    cursor.style.zIndex = '9999';
+    cursor.style.transition = 'transform 0.1s ease, width 0.3s ease, height 0.3s ease, background-color 0.3s ease';
+    document.body.appendChild(cursor);
+    
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = `${e.clientX}px`;
+      cursor.style.top = `${e.clientY}px`;
+    });
+    
+    serviceCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        cursor.style.width = '50px';
+        cursor.style.height = '50px';
+        cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+        cursor.style.mixBlendMode = 'difference';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        cursor.style.width = '30px';
+        cursor.style.height = '30px';
+        cursor.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+        cursor.style.mixBlendMode = 'normal';
+      });
+    });
+    
+    // Detect if device is touch-enabled
+    if ('ontouchstart' in window) {
+      cursor.style.display = 'none';
+    }
+  };
+  
+  // Typewriter effect for service titles
+  const initTypewriterEffect = () => {
+    const serviceTitles = document.querySelectorAll('.service-content h4');
+    
+    serviceTitles.forEach(title => {
+      const originalText = title.textContent;
+      title.textContent = '';
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            let i = 0;
+            const typing = setInterval(() => {
+              if (i < originalText.length) {
+                title.textContent += originalText.charAt(i);
+                i++;
+              } else {
+                clearInterval(typing);
+              }
+            }, 50);
+            observer.unobserve(title);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(title);
+    });
+  };
+  
+  // Initialize all features
+  setServiceCardColors();
+  initTabs();
+  initReadMoreButtons();
+  initScrollAnimations();
+  initDynamicBackground();
+  initTabIndicator();
+  
+  // Initialize optional advanced features - uncomment to enable
+  // initParallaxEffect();
+  // initCustomCursor();
+  // initTypewriterEffect();
+  
+  // Autoselect first tab on load
+  const firstTab = tabs[0];
+  if (firstTab) {
+    firstTab.click();
+  }
+  
+  // Add service icon animations
+  const addServiceIcons = () => {
+    const serviceCards = document.querySelectorAll('.service-card');
+    
+    serviceCards.forEach(card => {
+      const content = card.querySelector('.service-content');
+      const title = card.querySelector('h4');
+      
+      if (title && content) {
+        const icon = document.createElement('div');
+        icon.className = 'service-icon';
+        icon.style.position = 'absolute';
+        icon.style.top = '-25px';
+        icon.style.right = '20px';
+        icon.style.width = '50px';
+        icon.style.height = '50px';
+        icon.style.borderRadius = '50%';
+        icon.style.backgroundColor = 'white';
+        icon.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.1)';
+        icon.style.display = 'flex';
+        icon.style.alignItems = 'center';
+        icon.style.justifyContent = 'center';
+        
+        // Set icon color based on service type
+        const tabPanel = card.closest('.tab-panel');
+        if (tabPanel) {
+          const tabId = tabPanel.getAttribute('aria-labelledby');
+          const groupColor = tabGroups[tabId] || 'var(--group1-color)';
+          icon.style.color = `var(--${groupColor})`;
+        }
+        
+        content.style.position = 'relative';
+        content.insertBefore(icon, content.firstChild);
+      }
+    });
+  };
+  
+  // Call additional enhancements
+  addServiceIcons();
+  
+  // Add accessibility features
+  const enhanceAccessibility = () => {
+    // Add keyboard navigation for tabs
+    tabs.forEach(tab => {
+      tab.addEventListener('keydown', (e) => {
+        let index = Array.from(tabs).indexOf(tab);
+        
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+          index = (index + 1) % tabs.length;
+          tabs[index].focus();
+          tabs[index].click();
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+          index = (index - 1 + tabs.length) % tabs.length;
+          tabs[index].focus();
+          tabs[index].click();
+        }
+      });
+    });
+    
+    // Add focus styles
+    const style = document.createElement('style');
+    style.textContent = `
+      .tab:focus-visible, .read-more:focus-visible {
+        outline: 2px solid var(--active-color, var(--group1-color));
+        outline-offset: 2px;
+      }
+    `;
+    document.head.appendChild(style);
+  };
+  
+  enhanceAccessibility();
+  
+  // Performance optimization
+  const optimizePerformance = () => {
+    // Debounce function for resize events
+    const debounce = (func, delay) => {
+      let timeoutId;
+      return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          func.apply(context, args);
+        }, delay);
+      };
+    };
+    
+    // Handle resize events
+    const handleResize = debounce(() => {
+      const activeTab = document.querySelector('.tab[aria-selected="true"]');
+      if (activeTab) {
+        const tabIndicator = document.querySelector('.tab-indicator');
+        if (tabIndicator) {
+          const tabRect = activeTab.getBoundingClientRect();
+          const tabsListRect = document.querySelector('.tabs-list').getBoundingClientRect();
+          
+          tabIndicator.style.width = `${tabRect.width}px`;
+          tabIndicator.style.left = `${tabRect.left - tabsListRect.left}px`;
+        }
+      }
+    }, 100);
+    
+    window.addEventListener('resize', handleResize);
+  };
+  
+  optimizePerformance();
+});
+    
 }
