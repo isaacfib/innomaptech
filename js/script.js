@@ -1,7 +1,7 @@
 // Hamburger Menu
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.getElementById('nav-links');
-const navLinksList = navLinks.querySelectorAll('li a');
+const navLinksList = navLinks.querySelectorAll('li a, li button');
 
 // Toggle hamburger menu with improved focus management
 hamburger.addEventListener('click', () => {
@@ -15,9 +15,9 @@ hamburger.addEventListener('click', () => {
     }
 });
 
-// Close menu when a link is clicked
-navLinksList.forEach(link => {
-    link.addEventListener('click', () => {
+// Close menu when a link or button is clicked
+navLinksList.forEach(item => {
+    item.addEventListener('click', () => {
         hamburger.setAttribute('aria-expanded', 'false');
         navLinks.classList.remove('active');
         navLinks.setAttribute('aria-hidden', 'true');
@@ -38,7 +38,7 @@ if (navLinksList.length > 0) {
 
 // Modal Functionality
 const modal = document.getElementById('contactModal');
-const openModalBtns = document.querySelectorAll('#openModalBtn, #footerContactBtn, #headerContactBtn, #ctaContactBtn');
+const openModalBtns = document.querySelectorAll('#footerContactBtn, #headerContactBtn, #ctaContactBtn');
 const closeModalBtn = document.getElementById('closeModalBtn');
 
 // Open modal with smooth animation and proper focus management
