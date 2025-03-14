@@ -164,11 +164,30 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 // "Read More" Buttons
 const readMoreButtons = document.querySelectorAll('.read-more');
+
 readMoreButtons.forEach(button => {
     button.addEventListener('click', () => {
+        // Find the current tab panel
+        const currentPanel = button.closest('.tab-panel');
+        // Get all "Read More" buttons in this panel
+        const allReadMoreInPanel = currentPanel.querySelectorAll('.read-more');
+
+        // Collapse all other "Read More" sections in the same panel
+        allReadMoreInPanel.forEach(otherButton => {
+            if (otherButton !== button) {
+                const otherDetailId = otherButton.getAttribute('aria-controls');
+                const otherDetailElement = document.getElementById(otherDetailId);
+                otherButton.setAttribute('aria-expanded', 'false');
+                otherButton.textContent = 'Read More →';
+                otherDetailElement.classList.remove('expanded');
+            }
+        });
+
+        // Toggle the clicked "Read More" section
         const expanded = button.getAttribute('aria-expanded') === 'true';
         const detailId = button.getAttribute('aria-controls');
         const detailElement = document.getElementById(detailId);
+
         if (expanded) {
             button.setAttribute('aria-expanded', 'false');
             button.textContent = 'Read More →';
@@ -197,3 +216,24 @@ document.addEventListener('DOMContentLoaded', () => {
         firstTab.click();
     }
 });
+
+// Scroll event to close the menu
+window.addEventListener('scroll', () => {
+    if (navLinks.classList.contains('active')) {
+        hamburger.setAttribute('aria-expanded', 'false');
+        navLinks.classList.remove('active');
+        navLinks.setAttribute('aria-hidden', 'true');
+    }
+});
+
+// Click event to close the menu when clicking outside
+document.addEventListener('click', (event) => {
+    if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
+        if (navLinks.classList.contains('active')) {
+            hamburger.setAttribute('aria-expanded', 'false');
+            navLinks.classList.remove('active');
+            navLinks.setAttribute('aria-hidden', 'true');
+        }
+    }
+});
+
