@@ -274,108 +274,48 @@ header nav ul li a:hover, header nav ul li button:hover {
     z-index: -1;
 }
 
-.services-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2.5rem;
+.services-tabs {
     margin-top: 3rem;
 }
 
-.service-group {
-    margin-bottom: 4rem;
-    background: var(--surface);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    overflow: hidden;
-    transition: all var(--transition-medium);
-    border: 1px solid var(--border-light);
-}
-
-.service-group:hover {
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-5px);
-}
-
-.group-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 2rem;
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: var(--surface);
-    cursor: pointer;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    position: relative;
-}
-
-.group-header:focus {
-    outline: 2px solid var(--primary-light);
-    outline-offset: 2px;
-}
-
-.group-header::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-}
-
-.service-group:nth-child(2) .group-header {
-    background: linear-gradient(135deg, var(--group2-color), var(--secondary-dark));
-}
-
-.service-group:nth-child(3) .group-header {
-    background: linear-gradient(135deg, var(--group3-color), var(--accent));
-}
-
-.service-group:nth-child(4) .group-header {
-    background: linear-gradient(135deg, var(--group4-color), var(--group4-color));
-}
-
-.group-header h3 {
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
-.toggle-btn {
-    font-size: 1.2rem;
-    transition: transform var(--transition-medium);
+.tabs-list {
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.2);
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-.service-group.expanded .toggle-btn {
-    transform: rotate(180deg);
-    background-color: rgba(255, 255, 255, 0.3);
+.tab {
+    padding: 1rem 2rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    border-radius: var(--radius-sm);
 }
 
-.services {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height var(--transition-slow);
+.tab:hover {
+    background-color: var(--border-light);
 }
 
-.service-group.expanded .services {
-    max-height: 2000px;
+.tab.active {
+    background-color: var(--active-color);
+    color: var(--surface);
+    border-color: var(--active-color);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
 }
 
 .services-wrapper {
-    padding: 2rem;
-}
-
-.service-group.standalone .services {
-    max-height: none;
-}
-
-.service-group.standalone .services-wrapper {
     padding: 2rem;
 }
 
@@ -885,10 +825,6 @@ button[type="submit"]:active {
 }
 
 @media (max-width: 992px) {
-    .services-container {
-        grid-template-columns: 1fr;
-    }
-    
     .service-cards {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
@@ -968,14 +904,6 @@ button[type="submit"]:active {
         padding: 0.6rem 1.5rem;
     }
     
-    .service-group {
-        margin-bottom: 3rem;
-    }
-    
-    .group-header h3 {
-        font-size: 1.5rem;
-    }
-    
     .services-wrapper {
         padding: 1.5rem;
     }
@@ -995,5 +923,9 @@ button[type="submit"]:active {
     .cta .btn {
         padding: 0.8rem 2rem;
         font-size: 1.1rem;
+    }
+    
+    .tab {
+        padding: 0.8rem 1.5rem;
     }
 }
