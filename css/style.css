@@ -912,7 +912,7 @@ button[type="submit"]:active {
     
     #nav-links.active {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
     }
     
