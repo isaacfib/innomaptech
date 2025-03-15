@@ -1,33 +1,41 @@
 // Hamburger Menu
 const hamburger = document.querySelector('.hamburger');
 const navLinks = document.getElementById('nav-links');
-const navLinksList = navLinks.querySelectorAll('li a, li button');
+const navLinksList = navLinks ? navLinks.querySelectorAll('li a, li button') : [];
 
-hamburger.addEventListener('click', () => {
+function toggleMenu() {
     const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
     hamburger.setAttribute('aria-expanded', !isExpanded);
     navLinks.classList.toggle('active');
     navLinks.setAttribute('aria-hidden', isExpanded);
-    if (!isExpanded && navLinksList.length > 0) {
+}
+
+function closeMenu() {
+    hamburger.setAttribute('aria-expanded', 'false');
+    navLinks.classList.remove('active');
+    navLinks.setAttribute('aria-hidden', 'true');
+}
+
+hamburger.addEventListener('click', () => {
+    toggleMenu();
+    if (navLinks.classList.contains('active') && navLinksList.length > 0) {
         navLinksList[0].focus();
     }
 });
 
 navLinksList.forEach(item => {
     item.addEventListener('click', () => {
-        hamburger.setAttribute('aria-expanded', 'false');
-        navLinks.classList.remove('active');
-        navLinks.setAttribute('aria-hidden', 'true');
+        closeMenu();
     });
 });
 
 if (navLinksList.length > 0) {
     navLinksList[navLinksList.length - 1].addEventListener('focusout', () => {
         if (hamburger.getAttribute('aria-expanded') === 'true') {
-            hamburger.focus();
-            hamburger.setAttribute('aria-expanded', 'false');
-            navLinks.classList.remove('active');
-            navLinks.setAttribute('aria-hidden', 'true');
+            setTimeout(() => {
+                hamburger.focus();
+                closeMenu();
+            }, 0);
         }
     });
 }
@@ -37,17 +45,18 @@ const modal = document.getElementById('contactModal');
 const openModalBtns = document.querySelectorAll('#footerContactBtn, #headerContactBtn, #ctaContactBtn');
 const closeModalBtn = document.getElementById('closeModalBtn');
 
-openModalBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        modal.style.display = 'flex';
-        setTimeout(() => {
-            modal.classList.add('active');
-            document.getElementById('name').focus();
-        }, 10);
-        document.body.classList.add('modal-open');
-    });
-});
+function openModal(e) {
+    e.preventDefault();
+    modal.style.display = 'flex';
+    setTimeout(() => {
+        modal.classList.add('active');
+        const nameInput = document.getElementById('name');
+        if (nameInput) {
+            nameInput.focus();
+        }
+    }, 10);
+    document.body.classList.add('modal-open');
+}
 
 function closeModal() {
     modal.classList.remove('active');
@@ -55,8 +64,14 @@ function closeModal() {
         modal.style.display = 'none';
         document.body.classList.remove('modal-open');
     }, 300);
-    document.activeElement.blur();
+    if (document.activeElement) {
+        document.activeElement.blur();
+    }
 }
+
+openModalBtns.forEach(btn => {
+    btn.addEventListener('click', openModal);
+});
 
 closeModalBtn.addEventListener('click', closeModal);
 
@@ -74,73 +89,121 @@ window.addEventListener('keydown', (e) => {
 
 // Form Submission
 const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
+
+contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const formData = new FormData(contactForm);
     const formIsValid = validateForm(formData);
+
     if (formIsValid) {
-        const successMessage = document.createElement('div');
-        successMessage.className = 'success-message';
-        successMessage.textContent = 'Thank you for your interest! Our team will contact you shortly.';
-        contactForm.appendChild(successMessage);
-        setTimeout(() => {
-            closeModal();
-            contactForm.reset();
-            successMessage.remove();
-        }, 2000);
+        try {
+            // Simulate a form submission (replace with actual submission)
+            // const response = await fetch('/api/submit', {
+            //     method: 'POST',
+            //     body: formData
+            // });
+
+            // if (!response.ok) {
+            //     throw new Error(`HTTP error! status: ${response.status}`);
+            // }
+
+            // const result = await response.json();
+            // console.log('Success:', result);
+
+            const successMessage = document.createElement('div');
+            successMessage.className = 'success-message';
+            successMessage.textContent = 'Thank you for your interest! Our team will contact you shortly.';
+            contactForm.appendChild(successMessage);
+
+            setTimeout(() => {
+                closeModal();
+                contactForm.reset();
+                successMessage.remove();
+            }, 2000);
+
+        } catch (error) {
+            console.error('Error submitting form:', error);
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.textContent = 'Sorry, there was an error submitting your form. Please try again later.';
+            contactForm.appendChild(errorMessage);
+            setTimeout(() => {
+                errorMessage.remove();
+            }, 3000);
+        }
     }
 });
 
 function validateForm(formData) {
-    return true; // Placeholder; implement actual validation if needed
+    const name = formData.get('name');
+    const email = formData.get('email');
+
+    if (!name || name.trim() === '') {
+        alert('Please enter your name.');
+        return false;
+    }
+
+    if (!email || email.trim() === '' || !isValidEmail(email)) {
+        alert('Please enter a valid email address.');
+        return false;
+    }
+
+    return true;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
 }
 
 // Tab Functionality
 const tabs = document.querySelectorAll('.tab');
 const tabPanels = document.querySelectorAll('.tab-panel');
 
-tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        // Update tab states
-        tabs.forEach(t => {
-            t.setAttribute('aria-selected', 'false');
-        });
-        tab.setAttribute('aria-selected', 'true');
-        
-        // Update panel states
-        tabPanels.forEach(panel => {
-            panel.classList.remove('active');
-        });
-        const panelId = tab.getAttribute('aria-controls');
-        const panel = document.getElementById(panelId);
-        if (panel) {
-            panel.classList.add('active');
-            // Animate service cards
-            const cards = panel.querySelectorAll('.service-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
-                card.style.transition = 'none';
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100 * index);
-            });
-        }
+function activateTab(tab) {
+    tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+    tab.setAttribute('aria-selected', 'true');
+
+    tabPanels.forEach(panel => panel.classList.remove('active'));
+    const panelId = tab.getAttribute('aria-controls');
+    const panel = document.getElementById(panelId);
+
+    if (panel) {
+        panel.classList.add('active');
+        animateServiceCards(panel);
+    }
+}
+
+function animateServiceCards(panel) {
+    const cards = panel.querySelectorAll('.service-card');
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'none';
+
+        setTimeout(() => {
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 100 * index);
     });
+}
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => activateTab(tab));
 });
 
 tabs.forEach((tab, index) => {
     tab.addEventListener('keydown', (e) => {
+        let nextTab;
         if (e.key === 'ArrowRight') {
-            const nextTab = tabs[index + 1] || tabs[0];
-            nextTab.focus();
-            nextTab.click();
+            nextTab = tabs[index + 1] || tabs[0];
         } else if (e.key === 'ArrowLeft') {
-            const prevTab = tabs[index - 1] || tabs[tabs.length - 1];
-            prevTab.focus();
-            prevTab.click();
+            nextTab = tabs[index - 1] || tabs[tabs.length - 1];
+        }
+        if (nextTab) {
+            nextTab.focus();
+            activateTab(nextTab);
         }
     });
 });
@@ -151,6 +214,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         e.preventDefault();
         const targetId = this.getAttribute('href').substring(1);
         const targetElement = document.getElementById(targetId);
+
         if (targetElement) {
             const headerHeight = document.querySelector('header').offsetHeight;
             const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
@@ -158,6 +222,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
                 top: targetPosition,
                 behavior: 'smooth'
             });
+            history.pushState(null, null, `#${targetId}`);
         }
     });
 });
@@ -167,26 +232,27 @@ const readMoreButtons = document.querySelectorAll('.read-more');
 
 readMoreButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Find the current tab panel
         const currentPanel = button.closest('.tab-panel');
-        // Get all "Read More" buttons in this panel
         const allReadMoreInPanel = currentPanel.querySelectorAll('.read-more');
+        const detailId = button.getAttribute('aria-controls');
+        const detailElement = document.getElementById(detailId);
 
-        // Collapse all other "Read More" sections in the same panel
+        if (!detailElement || !currentPanel) return;
+
         allReadMoreInPanel.forEach(otherButton => {
+            const otherDetailId = otherButton.getAttribute('aria-controls');
+            const otherDetailElement = document.getElementById(otherDetailId);
+
+            if (!otherDetailElement) return;
+
             if (otherButton !== button) {
-                const otherDetailId = otherButton.getAttribute('aria-controls');
-                const otherDetailElement = document.getElementById(otherDetailId);
                 otherButton.setAttribute('aria-expanded', 'false');
                 otherButton.textContent = 'Read More →';
                 otherDetailElement.classList.remove('expanded');
             }
         });
 
-        // Toggle the clicked "Read More" section
         const expanded = button.getAttribute('aria-expanded') === 'true';
-        const detailId = button.getAttribute('aria-controls');
-        const detailElement = document.getElementById(detailId);
 
         if (expanded) {
             button.setAttribute('aria-expanded', 'false');
@@ -202,10 +268,8 @@ readMoreButtons.forEach(button => {
 
 // Window Resize Handler
 window.addEventListener('resize', () => {
-    if (window.innerWidth > 768) {
-        navLinks.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-        navLinks.setAttribute('aria-hidden', 'true');
+    if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+        closeMenu();
     }
 });
 
@@ -213,27 +277,20 @@ window.addEventListener('resize', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const firstTab = tabs[0];
     if (firstTab) {
-        firstTab.click();
+        activateTab(firstTab);
     }
 });
 
 // Scroll event to close the menu
 window.addEventListener('scroll', () => {
     if (navLinks.classList.contains('active')) {
-        hamburger.setAttribute('aria-expanded', 'false');
-        navLinks.classList.remove('active');
-        navLinks.setAttribute('aria-hidden', 'true');
+        closeMenu();
     }
 });
 
 // Click event to close the menu when clicking outside
 document.addEventListener('click', (event) => {
-    if (!navLinks.contains(event.target) && !hamburger.contains(event.target)) {
-        if (navLinks.classList.contains('active')) {
-            hamburger.setAttribute('aria-expanded', 'false');
-            navLinks.classList.remove('active');
-            navLinks.setAttribute('aria-hidden', 'true');
-        }
+    if (!navLinks.contains(event.target) && !hamburger.contains(event.target) && navLinks.classList.contains('active')) {
+        closeMenu();
     }
 });
-
