@@ -260,8 +260,8 @@ header nav ul li a:hover, header nav ul li button:hover {
     padding: 5rem 0;
     background-color: var(--background);
     background-image: 
-        repeating-linear-gradient(to bottom, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.03) 19px, rgba(0, 0, 0, 0.03) 20px),
-        repeating-linear-gradient(to right, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.03) 19px, rgba(0, 0, 0, 0.03) 20px);
+        repeating-linear-gradient(to bottom, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.02) 19px, rgba(0, 0, 0, 0.02) 20px),
+        repeating-linear-gradient(to right, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.02) 19px, rgba(0, 0, 0, 0.02) 20px);
 }
 
 /* Services Section */
@@ -519,8 +519,8 @@ header nav ul li a:hover, header nav ul li button:hover {
     background-color: var(--surface);
     padding: 5rem 0;
     background-image: 
-        repeating-linear-gradient(to bottom, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.03) 19px, rgba(0, 0, 0, 0.03) 20px),
-        repeating-linear-gradient(to right, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.03) 19px, rgba(0, 0, 0, 0.03) 20px);
+        repeating-linear-gradient(to bottom, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.02) 19px, rgba(0, 0, 0, 0.02) 20px),
+        repeating-linear-gradient(to right, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.02) 19px, rgba(0, 0, 0, 0.02) 20px);
 }
 
 .workflow-intro {
