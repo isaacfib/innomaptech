@@ -1021,15 +1021,15 @@ button[type="submit"]:active {
     background-image: linear-gradient(to right, 
         transparent, 
         transparent 3.23333%, /* Adjusted Percentage */
-        rgba(248, 250, 252, 0.03) 3.33333%, /* Adjusted Percentage and Color */
-        rgba(248, 250, 252, 0.03) 6.56667%, /* Adjusted Percentage and Color */
+        rgba(248, 250, 252, 0.3) 3.33333%, /* Adjusted Percentage and Color */
+        rgba(248, 250, 252, 0.3) 6.56667%, /* Adjusted Percentage and Color */
         transparent 6.66667%, /* Adjusted Percentage */
         transparent),
     linear-gradient(to bottom,
         transparent,
         transparent 3.23333%, /* Adjusted Percentage */
-        rgba(248, 250, 252, 0.03) 3.33333%, /* Adjusted Percentage and Color */
-        rgba(248, 250, 252, 0.03) 6.56667%, /* Adjusted Percentage and Color */
+        rgba(248, 250, 252, 0.3) 3.33333%, /* Adjusted Percentage and Color */
+        rgba(248, 250, 252, 0.3) 6.56667%, /* Adjusted Percentage and Color */
         transparent 6.66667%, /* Adjusted Percentage */
         transparent);
     background-size: 100% 3.33333%, 3.33333% 100%; /* Adjusted Percentage */
@@ -1043,15 +1043,15 @@ button[type="submit"]:active {
     background-image: linear-gradient(to right, 
         transparent, 
         transparent 3.23333%, /* Adjusted Percentage */
-        rgba(248, 250, 252, 0.03) 3.33333%, /* Adjusted Percentage and Color */
-        rgba(248, 250, 252, 0.03) 6.56667%, /* Adjusted Percentage and Color */
+        rgba(248, 250, 252, 0.3) 3.33333%, /* Adjusted Percentage and Color */
+        rgba(248, 250, 252, 0.3) 6.56667%, /* Adjusted Percentage and Color */
         transparent 6.66667%, /* Adjusted Percentage */
         transparent),
     linear-gradient(to bottom,
         transparent,
         transparent 3.23333%, /* Adjusted Percentage */
-        rgba(248, 250, 252, 0.03) 3.33333%, /* Adjusted Percentage and Color */
-        rgba(248, 250, 252, 0.03) 6.56667%, /* Adjusted Percentage and Color */
+        rgba(248, 250, 252, 0.3) 3.33333%, /* Adjusted Percentage and Color */
+        rgba(248, 250, 252, 0.3) 6.56667%, /* Adjusted Percentage and Color */
         transparent 6.66667%, /* Adjusted Percentage */
         transparent);
     background-size: 100% 3.33333%, 3.33333% 100%; /* Adjusted Percentage */
