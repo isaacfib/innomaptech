@@ -258,6 +258,10 @@ header nav ul li a:hover, header nav ul li button:hover {
 /* About */
 .about {
     padding: 5rem 0;
+    background-color: var(--surface);
+    background-image: 
+        repeating-linear-gradient(to bottom, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.05) 19px, rgba(0, 0, 0, 0.05) 20px),
+        repeating-linear-gradient(to right, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.05) 19px, rgba(0, 0, 0, 0.05) 20px);
 }
 
 /* Services Section */
@@ -514,6 +518,9 @@ header nav ul li a:hover, header nav ul li button:hover {
 .workflow {
     background-color: var(--surface);
     padding: 5rem 0;
+    background-image: 
+        repeating-linear-gradient(to bottom, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.05) 19px, rgba(0, 0, 0, 0.05) 20px),
+        repeating-linear-gradient(to right, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.05) 19px, rgba(0, 0, 0, 0.05) 20px);
 }
 
 .workflow-intro {
@@ -1012,48 +1019,4 @@ button[type="submit"]:active {
 .service-detail::-webkit-scrollbar-thumb {
     background-color: var(--active-color, var(--group1-color));
     border-radius: 10px;
-}
-
-
-/* About Section */
-.about {
-    padding: 5rem 0;
-    background-image: linear-gradient(to right, 
-        transparent, 
-        transparent 3.23333%, /* Adjusted Percentage */
-        rgba(248, 250, 252, 0.3) 3.33333%, /* Adjusted Percentage and Color */
-        rgba(248, 250, 252, 0.3) 6.56667%, /* Adjusted Percentage and Color */
-        transparent 6.66667%, /* Adjusted Percentage */
-        transparent),
-    linear-gradient(to bottom,
-        transparent,
-        transparent 3.23333%, /* Adjusted Percentage */
-        rgba(248, 250, 252, 0.3) 3.33333%, /* Adjusted Percentage and Color */
-        rgba(248, 250, 252, 0.3) 6.56667%, /* Adjusted Percentage and Color */
-        transparent 6.66667%, /* Adjusted Percentage */
-        transparent);
-    background-size: 100% 3.33333%, 3.33333% 100%; /* Adjusted Percentage */
-    background-repeat: repeat;
-}
-
-/* Workflow Section */
-.workflow {
-    background-color: var(--surface); /* Retain existing background */
-    padding: 5rem 0;
-    background-image: linear-gradient(to right, 
-        transparent, 
-        transparent 3.23333%, /* Adjusted Percentage */
-        rgba(248, 250, 252, 0.3) 3.33333%, /* Adjusted Percentage and Color */
-        rgba(248, 250, 252, 0.3) 6.56667%, /* Adjusted Percentage and Color */
-        transparent 6.66667%, /* Adjusted Percentage */
-        transparent),
-    linear-gradient(to bottom,
-        transparent,
-        transparent 3.23333%, /* Adjusted Percentage */
-        rgba(248, 250, 252, 0.3) 3.33333%, /* Adjusted Percentage and Color */
-        rgba(248, 250, 252, 0.3) 6.56667%, /* Adjusted Percentage and Color */
-        transparent 6.66667%, /* Adjusted Percentage */
-        transparent);
-    background-size: 100% 3.33333%, 3.33333% 100%; /* Adjusted Percentage */
-    background-repeat: repeat;
 }
