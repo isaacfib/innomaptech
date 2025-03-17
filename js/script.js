@@ -40,52 +40,24 @@ if (navLinksList.length > 0) {
     });
 }
 
-// Modal Functionality
-const modal = document.getElementById('contactModal');
-const openModalBtns = document.querySelectorAll('#footerContactBtn, #headerContactBtn, #ctaContactBtn');
-const closeModalBtn = document.getElementById('closeModalBtn');
+// Contact Section Visibility
+const ctaContactBtn = document.getElementById('ctaContactBtn');
+const headerContactLink = document.getElementById('headerContactLink');
+const contactSection = document.getElementById('contact');
 
-function openModal(e) {
+function showContactSection(e) {
     e.preventDefault();
-    modal.style.display = 'flex';
-    setTimeout(() => {
-        modal.classList.add('active');
-        const nameInput = document.getElementById('name');
-        if (nameInput) {
-            nameInput.focus();
-        }
-    }, 10);
-    document.body.classList.add('modal-open');
+    contactSection.classList.add('active');
+    //Smooth scroll to contact section
+    const targetPosition = contactSection.getBoundingClientRect().top + window.pageYOffset - document.querySelector('header').offsetHeight - 20;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
 }
 
-function closeModal() {
-    modal.classList.remove('active');
-    setTimeout(() => {
-        modal.style.display = 'none';
-        document.body.classList.remove('modal-open');
-    }, 300);
-    if (document.activeElement) {
-        document.activeElement.blur();
-    }
-}
-
-openModalBtns.forEach(btn => {
-    btn.addEventListener('click', openModal);
-});
-
-closeModalBtn.addEventListener('click', closeModal);
-
-window.addEventListener('click', (event) => {
-    if (event.target === modal) {
-        closeModal();
-    }
-});
-
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('active')) {
-        closeModal();
-    }
-});
+ctaContactBtn.addEventListener('click', showContactSection);
+headerContactLink.addEventListener('click', showContactSection);
 
 // Form Submission
 const contactForm = document.getElementById('contactForm');
@@ -116,7 +88,7 @@ contactForm.addEventListener('submit', async (e) => {
             contactForm.appendChild(successMessage);
 
             setTimeout(() => {
-                closeModal();
+                contactSection.classList.remove('active');
                 contactForm.reset();
                 successMessage.remove();
             }, 2000);
@@ -225,6 +197,26 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
             history.pushState(null, null, `#${targetId}`);
         }
     });
+});
+
+//Home Navlink
+document.querySelector('header .logo a').addEventListener('click', function (e) {
+    e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            history.pushState(null, null, `#`);
+    
+});
+document.querySelector('header nav ul li a[href="#"]').addEventListener('click', function (e) {
+    e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            history.pushState(null, null, `#`);
+    
 });
 
 // "Read More" Buttons
