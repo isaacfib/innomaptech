@@ -36,6 +36,7 @@
     --spacing-md: 20px;
     --spacing-lg: 30px;
     --spacing-xl: 40px;
+    --transition: all 0.3s ease;
 }
 
 /* General Styles */
@@ -172,6 +173,7 @@ header nav ul li button:hover {
     padding: 160px 0 80px;
     text-align: center;
     animation: fadeIn 1s ease-in;
+    transition: var(--transition);
 }
 
 .hero h2 {
@@ -276,6 +278,7 @@ header nav ul li button:hover {
     padding: 5rem 0;
     background-color: var(--background);
     background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.01) 19px, rgba(0, 0, 0, 0.01) 20px), repeating-linear-gradient(to right, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.01) 19px, rgba(0, 0, 0, 0.01) 20px);
+    transition: var(--transition);
 }
 
 /* Services Section */
@@ -284,6 +287,7 @@ header nav ul li button:hover {
     background-color: var(--background);
     position: relative;
     overflow: hidden;
+    transition: var(--transition);
 }
 
 #services::before {
@@ -328,6 +332,7 @@ header nav ul li button:hover {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    transition: var(--transition);
 }
 
 .tabs-list {
@@ -414,6 +419,7 @@ header nav ul li button:hover {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
+    transition: var(--transition);
 }
 
 .service-card {
@@ -533,6 +539,7 @@ header nav ul li button:hover {
     background-color: var(--surface);
     padding: 5rem 0;
     background-image: repeating-linear-gradient(to bottom, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.01) 19px, rgba(0, 0, 0, 0.01) 20px), repeating-linear-gradient(to right, transparent 0px, transparent 19px, rgba(0, 0, 0, 0.01) 19px, rgba(0, 0, 0, 0.01) 20px);
+    transition: var(--transition);
 }
 
 .workflow-intro {
@@ -591,6 +598,7 @@ header nav ul li button:hover {
     text-align: center;
     position: relative;
     overflow: hidden;
+    transition: var(--transition);
 }
 
 .cta::before {
@@ -655,6 +663,7 @@ header nav ul li button:hover {
     position: relative;
     overflow: hidden;
     display: none;
+    transition: var(--transition);
 }
 
 .contact::before {
