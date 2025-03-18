@@ -870,6 +870,7 @@ footer {
         justify-content: center;
         align-items: center;
         gap: 1.5rem;
+        background: radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.05) 0%, rgba(46, 204, 113, 0.05) 25%, rgba(155, 89, 182, 0.05) 50%, rgba(231, 76, 60, 0.05) 75%);
     }
 
     header nav ul li {
