@@ -690,7 +690,7 @@ header nav ul li button:hover {
 }
 
 .contact-intro .secondary-light {
-    color: linear-gradient(135deg, #2a9d8f, #1d7d72);
+    color: var(--group2-color);
     display: block;
     margin-top: 1rem;
     font-style: italic;
