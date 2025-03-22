@@ -92,7 +92,7 @@ header .logo a {
 }
 
 header .logo-img {
-    height: 1.5rem;
+    height: 3rem;
     margin-right: 1rem;
     transition: transform var(--transition-medium);
 }
