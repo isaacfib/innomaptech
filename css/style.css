@@ -91,13 +91,13 @@ header .logo a {
     text-decoration: none;
 }
 
-header .logo i {
+header .logo-img {
     height: 20px;
     margin-right: 1rem;
     transition: transform var(--transition-medium);
 }
 
-header .logo i:hover {
+header .logo-img:hover {
     transform: scale(1.1);
 }
 
