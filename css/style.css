@@ -1018,3 +1018,189 @@ footer {
     background-color: var(--active-color, var(--group1-color));
     border-radius: 10px;
 }
+
+/* Services Section Refinements */
+#services {
+    padding: 5rem 0;
+    background-color: var(--background);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+#services::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 10% 20%, 
+        rgba(52, 152, 219, 0.05) 0%, 
+        rgba(46, 204, 113, 0.05) 25%, 
+        rgba(155, 89, 182, 0.05) 50%, 
+        rgba(231, 76, 60, 0.05) 75%
+    );
+    z-index: 0;
+}
+
+.service-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+    transition: var(--transition);
+    padding: 1rem;
+}
+
+.service-card {
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.05), 
+        0 5px 10px rgba(0, 0, 0, 0.03);
+    transition: 
+        transform var(--transition-speed) ease, 
+        box-shadow var(--transition-speed) ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-light);
+    position: relative;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+        to right, 
+        var(--group1-color), 
+        var(--group2-color), 
+        var(--group3-color)
+    );
+    transform: scaleX(0);
+    transition: transform var(--transition-speed) ease;
+}
+
+.service-card:hover::after {
+    transform: scaleX(1);
+}
+
+.service-card:hover {
+    transform: translateY(-10px) rotateX(3deg);
+    box-shadow: 
+        0 15px 40px rgba(0, 0, 0, 0.1), 
+        0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.service-img {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.service-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 
+        transform 0.5s ease, 
+        filter 0.5s ease;
+}
+
+.service-card:hover .service-img img {
+    transform: scale(1.05);
+    filter: brightness(0.9);
+}
+
+.service-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+}
+
+.service-content h4 {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+    transition: color var(--transition-speed) ease;
+}
+
+.service-content h4::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background-color: var(--active-color, var(--group1-color));
+    transform: scaleX(0);
+    transition: transform var(--transition-speed) ease;
+}
+
+.service-card:hover .service-content h4::after {
+    transform: scaleX(1);
+}
+
+.service-content p {
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.read-more {
+    margin-top: auto;
+    align-self: flex-start;
+    background: none;
+    border: none;
+    color: var(--active-color, var(--group1-color));
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    transition: 
+        color 0.3s ease, 
+        transform 0.3s ease;
+}
+
+.read-more:hover {
+    color: var(--group2-color);
+    transform: translateX(5px);
+}
+
+.read-more::after {
+    content: "→";
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.read-more[aria-expanded="true"]::after {
+    transform: rotate(90deg);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .service-cards {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .service-cards {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
