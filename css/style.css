@@ -830,7 +830,7 @@ footer {
 
 .social-icon:hover {
     color: var(--surface);
-    background-color: var(--accent);
+    background-color: var(--group2-color);
     transform: translateY(-3px);
 }
 
