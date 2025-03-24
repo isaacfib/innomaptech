@@ -811,17 +811,21 @@ footer {
 }
 
 .social-icon {
-    font-size: 1.5rem;
-    color: var(--text-lighter);
-    text-decoration: none;
-    transition: all var(--transition-medium);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+    transition: all var(--transition-medium);
+}
+
+.social-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .social-icon:hover {
@@ -883,10 +887,7 @@ footer {
         left: 0;
         width: 100%;
         height: 1.4px;
-        background: linear-gradient(90deg, 
-            var(--primary) 0%, 
-            var(--secondary) 50%, 
-            var(--accent) 100%);
+        background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
         z-index: 1;
         animation: lineExpand 0.4s ease-out;
     }
@@ -977,6 +978,11 @@ footer {
     .tab {
         padding: 0.8rem 1.5rem;
     }
+
+    .social-icon {
+        width: 28px;
+        height: 28px;
+    }
 }
 
 /* Animation Classes */
@@ -988,7 +994,6 @@ footer {
     from {
         opacity: 0;
     }
-
     to {
         opacity: 1;
     }
@@ -1012,4 +1017,4 @@ footer {
 .service-detail::-webkit-scrollbar-thumb {
     background-color: var(--active-color, var(--group1-color));
     border-radius: 10px;
-        }
+}
