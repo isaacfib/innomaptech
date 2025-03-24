@@ -417,8 +417,9 @@ header nav ul li button:hover {
 /* Services Cards */
 .service-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 400px));
     gap: 2rem;
+    justify-content: center;
     transition: var(--transition);
 }
 
@@ -1203,5 +1204,17 @@ footer {
     .service-cards {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+}
+
+/* New Styles for Scrollable Service Card on Small Screens */
+@media (max-width: 768px) {
+    .service-card.expanded-card {
+        max-height: calc(100vh - 100px); /* Adjust 100px based on header height */
+        overflow-y: auto;
+    }
+    .service-card.expanded-card .service-detail.expanded {
+        max-height: none;
+        overflow-y: visible;
     }
 }
