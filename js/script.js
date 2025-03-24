@@ -230,14 +230,18 @@ readMoreButtons.forEach(button => {
 
         // Close other expanded details in the same panel
         allReadMoreInPanel.forEach(otherButton => {
-            const otherDetailId = otherButton.getAttribute('aria-controls');
-            const otherDetailElement = document.getElementById(otherDetailId);
-            if (!otherDetailElement) return;
-            
             if (otherButton !== button) {
-                otherButton.setAttribute('aria-expanded', 'false');
-                otherButton.textContent = 'Read More →';
-                otherDetailElement.classList.remove('expanded');
+                const otherDetailId = otherButton.getAttribute('aria-controls');
+                const otherDetailElement = document.getElementById(otherDetailId);
+                if (otherDetailElement) {
+                    otherButton.setAttribute('aria-expanded', 'false');
+                    otherButton.textContent = 'Read More →';
+                    otherDetailElement.classList.remove('expanded');
+                    const otherServiceCard = otherButton.closest('.service-card');
+                    if (otherServiceCard) {
+                        otherServiceCard.classList.remove('expanded-card');
+                    }
+                }
             }
         });
 
@@ -247,10 +251,12 @@ readMoreButtons.forEach(button => {
             button.setAttribute('aria-expanded', 'false');
             button.textContent = 'Read More →';
             detailElement.classList.remove('expanded');
+            serviceCard.classList.remove('expanded-card');
         } else {
             button.setAttribute('aria-expanded', 'true');
             button.textContent = 'Read Less →';
             detailElement.classList.add('expanded');
+            serviceCard.classList.add('expanded-card');
         }
 
         // Smooth scroll to the top of the card
