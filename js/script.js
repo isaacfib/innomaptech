@@ -48,12 +48,12 @@ const contactSection = document.getElementById('contact');
 function showContactSection(e) {
     e.preventDefault();
     contactSection.classList.add('active');
-    //Smooth scroll to contact section
+    // Smooth scroll to contact section
     const targetPosition = contactSection.getBoundingClientRect().top + window.pageYOffset - document.querySelector('header').offsetHeight - 20;
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
 }
 
 ctaContactBtn.addEventListener('click', showContactSection);
@@ -74,11 +74,9 @@ contactForm.addEventListener('submit', async (e) => {
             //     method: 'POST',
             //     body: formData
             // });
-
             // if (!response.ok) {
             //     throw new Error(`HTTP error! status: ${response.status}`);
             // }
-
             // const result = await response.json();
             // console.log('Success:', result);
 
@@ -199,24 +197,23 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     });
 });
 
-//Home Navlink
+// Home Navlink
 document.querySelector('header .logo a').addEventListener('click', function (e) {
     e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            history.pushState(null, null, `#`);
-    
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+    history.pushState(null, null, `#`);
 });
+
 document.querySelector('header nav ul li a[href="#"]').addEventListener('click', function (e) {
     e.preventDefault();
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-            history.pushState(null, null, `#`);
-    
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+    history.pushState(null, null, `#`);
 });
 
 // "Read More" Buttons
