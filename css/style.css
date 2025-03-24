@@ -508,6 +508,7 @@ header nav ul li button:hover {
 
 .service-detail.expanded {
     max-height: 400px;
+    overflow-y: auto;
 }
 
 .read-more {
