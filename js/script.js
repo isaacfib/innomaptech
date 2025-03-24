@@ -218,22 +218,22 @@ document.querySelector('header nav ul li a[href="#"]').addEventListener('click',
 
 // "Read More" Buttons
 const readMoreButtons = document.querySelectorAll('.read-more');
-
 readMoreButtons.forEach(button => {
     button.addEventListener('click', () => {
         const currentPanel = button.closest('.tab-panel');
+        const serviceCard = button.closest('.service-card');
         const allReadMoreInPanel = currentPanel.querySelectorAll('.read-more');
         const detailId = button.getAttribute('aria-controls');
         const detailElement = document.getElementById(detailId);
 
-        if (!detailElement || !currentPanel) return;
+        if (!detailElement || !currentPanel || !serviceCard) return;
 
+        // Close other expanded details in the same panel
         allReadMoreInPanel.forEach(otherButton => {
             const otherDetailId = otherButton.getAttribute('aria-controls');
             const otherDetailElement = document.getElementById(otherDetailId);
-
             if (!otherDetailElement) return;
-
+            
             if (otherButton !== button) {
                 otherButton.setAttribute('aria-expanded', 'false');
                 otherButton.textContent = 'Read More →';
@@ -242,7 +242,7 @@ readMoreButtons.forEach(button => {
         });
 
         const expanded = button.getAttribute('aria-expanded') === 'true';
-
+        
         if (expanded) {
             button.setAttribute('aria-expanded', 'false');
             button.textContent = 'Read More →';
@@ -252,6 +252,15 @@ readMoreButtons.forEach(button => {
             button.textContent = 'Read Less →';
             detailElement.classList.add('expanded');
         }
+
+        // Smooth scroll to the top of the card
+        const headerHeight = document.querySelector('header').offsetHeight;
+        const cardPosition = serviceCard.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+        
+        window.scrollTo({
+            top: cardPosition,
+            behavior: 'smooth'
+        });
     });
 });
 
