@@ -298,3 +298,10 @@ document.addEventListener('click', (event) => {
         closeMenu();
     }
 });
+
+
+// Automatically update the copyright year
+
+        document.getElementById('copyright').innerHTML = 
+
+            `© ${new Date().getFullYear()} INNOMAPTECH. All rights reserved.`;
